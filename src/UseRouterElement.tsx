@@ -143,11 +143,11 @@ export default function useRouteElements() {
             // { path: 'dashboard', element: <div>Admin Dashboard</div> },
             { path: '', element: <QlyKhachHang /> },
             { path: 'qlyKhachHang', element: <QlyKhachHang /> },
-            { path: 'qlyKhachHang', element: <Outlet /> },
+
             {
               children: [
                 { path: 'add', element: <AddKhachHang /> },
-                { path: 'edit', element: <EditKhachHang /> }
+                { path: 'edit/:id', element: <EditKhachHang /> }
               ]
             },
             { path: 'quan-ly-bac-si', element: <div>quan-ly-bac-si</div> },

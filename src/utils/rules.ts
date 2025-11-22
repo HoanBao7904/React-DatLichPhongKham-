@@ -62,6 +62,19 @@ export const profileSchema = yup.object({
     .max(160, 'Độ dài 5 -100 kí tự')
 })
 
+export const AddSchema = yup.object({
+  fullName: yup.string().max(200, 'độ dài tối đa 200 kí tự').required(),
+  phone: yup.string().max(10, 'độ dài tối đa 10 kí tự').required(),
+  dateOfBirth: yup.date().max(new Date(), 'hãy chọn ngày trong quá khứ').required(),
+  userName: yup.string().max(60, 'độ dài tối đa 60 kí tự').required(),
+  email: yup
+    .string()
+    .required('Email không được để trống')
+    .email('Email không hợp lệ')
+    .min(5, 'Độ dài 5 -100 kí tự')
+    .max(160, 'Độ dài 5 -100 kí tự')
+})
+
 export type Schema = yup.InferType<typeof schema> // dùng kiểu dữ liệu này hay fromRegister
 
 export interface loginSchema {

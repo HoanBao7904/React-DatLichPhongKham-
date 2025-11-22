@@ -9,7 +9,8 @@ export interface User {
   address: string
   dateOfBirth: Date // Date trong backend → Date hoặc null
   createdAt: Date
-  Active: boolean
+  active: boolean
+  password: string
   role: Role
 }
 

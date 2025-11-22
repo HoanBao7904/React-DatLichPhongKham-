@@ -33,3 +33,14 @@ export interface ErrorResponseAPI<T = { email?: string; userName?: string }> {
   operationType: string
   thời_gian: string
 }
+
+export interface ErrorResponseAPI1<
+  T = { email?: string; userName?: string; fullName?: string; phone: string; password: string; dateOfBirth: Date }
+> {
+  code: string
+  details: T
+  domain: string
+  message: string
+  operationType: string
+  thời_gian: string
+}

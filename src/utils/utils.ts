@@ -11,6 +11,9 @@ export function isAxios409<T>(error: unknown): error is AxiosError<T> {
 export function isAxios401<T>(error: unknown): error is AxiosError<T> {
   return isAxiosError(error) && error.response?.status === 401 //409
 }
+export function isAxios400<T>(error: unknown): error is AxiosError<T> {
+  return isAxiosError(error) && error.response?.status === 400 //409
+}
 
 export function isAxios500<T>(error: unknown): error is AxiosError<T> {
   return isAxiosError(error) && error.response?.status === 500
