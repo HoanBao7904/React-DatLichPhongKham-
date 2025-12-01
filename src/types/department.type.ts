@@ -29,7 +29,7 @@ export interface DepartMentDetailResponse {
   'thời gian': string
 }
 
-export interface DepartMentFillConfig {
-  id?: number
-  name?: boolean
-}
+// export interface DepartMentFillConfig {
+//   id?: number
+//   name?: boolean
+// }

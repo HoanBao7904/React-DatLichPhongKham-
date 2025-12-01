@@ -115,7 +115,7 @@ export default function QlyKhachHang() {
         </div>
         <Link
           to='add'
-          className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] hover:from-[#1e3e2a] hover:to-[#e05555] text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:scale-105'
+          className='bg-gradient-to-r from-blue-500 to-cyan-200 hover:from-blue-500 hover:to-cyan-300 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:scale-110'
         >
           <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
@@ -128,7 +128,7 @@ export default function QlyKhachHang() {
       <div className='bg-white rounded-2xl shadow-xl overflow-hidden'>
         <div className='overflow-x-auto'>
           <table className='w-full text-sm text-left text-gray-500'>
-            <thead className='table-fixed text-xs text-gray-700 uppercase bg-gradient-to-r from-[#DCEDC2] to-[#FFDBB5]'>
+            <thead className='table-fixed text-xs text-gray-700 uppercase bg-gradient-to-r from-blue-200 to-cyan-200'>
               <tr>
                 <th scope='col' className='px-6 py-4 text-center font-semibold'>
                   ID
@@ -219,7 +219,7 @@ export default function QlyKhachHang() {
                         </button>
                         <Link
                           // to={`edit/:id${user.userId}`}
-                          to={`edit/${user.userId}`}
+                          to={`/admin/edit/${user.userId}`}
                           title='Chỉnh sửa'
                           className='p-2 text-green-600 bg-green-50 rounded-lg hover:bg-green-100 hover:scale-110 transition-all duration-200 border border-green-200'
                         >

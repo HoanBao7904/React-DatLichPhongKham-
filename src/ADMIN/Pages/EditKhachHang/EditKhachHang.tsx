@@ -24,11 +24,8 @@ export default function EditKhachHang() {
   const {
     register,
     setValue,
-
-    watch,
     formState: { errors },
     handleSubmit,
-
     control
   } = useForm<FormData>({
     defaultValues: {
@@ -65,10 +62,6 @@ export default function EditKhachHang() {
     }
   }, [dataUSER, setValue])
 
-  // Thêm watch để theo dõi giá trị form
-  const activeValue = watch('active')
-  console.log('activeValue in form:', activeValue)
-
   const updateUserMutation = useMutation({
     mutationFn: (body: Omit<User, 'userId' | 'createdAt' | 'role' | 'active' | 'password'>) =>
       AllUserAPI.updateUserAPI(Number(id), body)
@@ -94,7 +87,7 @@ export default function EditKhachHang() {
       }
 
       await updateUserMutation.mutateAsync(basicInfoData)
-      // toast.success('Cập nhật thông tin thành công')
+      toast.success('Cập nhật thông tin thành công')
 
       // 2. Update role nếu có thay đổi
       if (dataUSER && data.role !== dataUSER.role) {
@@ -104,16 +97,16 @@ export default function EditKhachHang() {
             userId: id,
             roleId: roleId
           })
-          // toast.success('Cập nhật vai trò thành công')
+          toast.success('Cập nhật vai trò thành công')
         }
       }
 
       // 3. Update status nếu có thay đổi
       if (dataUSER && data.active !== dataUSER.active) {
         await CapNhapActionMutation.mutateAsync(data.active)
-        // toast.success('Cập nhật trạng thái thành công')
+        toast.success('Cập nhật trạng thái thành công')
       }
-      toast.success('cập nhập thông tin thành công')
+      // toast.success('cập nhập thông tin thành công')
     } catch (error) {
       console.log(error)
       toast.error('Có lỗi xảy ra')
@@ -298,7 +291,7 @@ export default function EditKhachHang() {
             </Link>
             <button
               type='submit'
-              className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 font-semibold'
+              className='bg-gradient-to-r from-blue-500 to-cyan-200 text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 font-semibold'
             >
               Cập Nhật Thông Tin
             </button>

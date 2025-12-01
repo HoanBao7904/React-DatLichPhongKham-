@@ -2,11 +2,6 @@ import type { User } from 'src/types/user.type'
 import type { SuccessResponseApi1 } from 'src/types/utils.type'
 import http from 'src/utils/http'
 
-// interface bodyupdateProfile extends Omit<User, '_id' | 'roles' | 'createdAt' | 'updatedAt' | 'email'> {
-//   password?: string
-//   newPassword?: string
-// }
-
 export interface updateProfice {
   fullName: string
   email: string

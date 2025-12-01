@@ -11,7 +11,7 @@ import type { ErrorResponseAPI1 } from 'src/types/utils.type'
 import { AddSchema } from 'src/utils/rules'
 import { isAxios400, isAxios409 } from 'src/utils/utils'
 
-type FromData = Omit<User, 'userId' | 'address' | 'createdAt' | 'Active' | 'role'>
+type FromData = Omit<User, 'userId' | 'address' | 'createdAt' | 'Active' | 'role' | 'id' | 'active'>
 
 export default function AddKhachHang() {
   // const addMatch = useMatch('admin/add')
@@ -64,9 +64,9 @@ export default function AddKhachHang() {
             })
           }
         }
-      } // <-- đóng onError
-    }) // <-- đóng mutate
-  }) // <-- đóng handleSubmit
+      }
+    })
+  })
 
   return (
     <div className='min-h-screen bg-gray-50 p-6'>
@@ -155,7 +155,7 @@ export default function AddKhachHang() {
               </Link>
               <button
                 type='submit'
-                className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 font-semibold'
+                className='bg-gradient-to-r from-blue-500 to-cyan-200 text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 font-semibold'
               >
                 Thêm Khách Hàng
               </button>

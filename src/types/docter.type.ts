@@ -7,13 +7,13 @@ export interface Doctor {
   email: string
   phone: string
   experienceYears: number
-  description: string
+  description: string | null
   imageUrl: string | null
   active: boolean
   isFeatured: boolean
-  departmentId: number
-  departmentName: string
-  schedules: any[]
+  departmentId: number | null // <-- CHO PHÉP null
+  departmentName: string | null // <-- CHO PHÉP null
+  schedules: string[]
   specializations: any[]
   appointments: any[]
 }
@@ -44,4 +44,20 @@ export interface DocterListFillConfig {
   isFeatured?: boolean
   departmentName?: string
   departmentId?: number
+}
+
+export interface AppointmentUser {
+  id: number
+  appointmentDateTime: string
+  status: string
+  note: null
+  userId: number
+  userFullName: string
+  userEmail: string
+  userPhone: string
+  doctorId: number
+  doctorFullName: string
+  doctorDepartmentName: string
+  doctorImageUrl: string | null
+  doctorExperienceYears: number
 }

@@ -10,3 +10,13 @@ export interface AllUser {
   role: string
   active: boolean
 }
+
+export interface schedules {
+  id: number
+  dayOfWeek: string
+  startAt: string
+  endAt: string
+  active: boolean
+  doctorId: number
+  doctorName: string
+}

@@ -11,10 +11,3 @@ const AuthApi = {
 }
 
 export default AuthApi
-
-// export const registerAccount = (body: RegisterBody) => http.post<AuthResponse>('/auth/signUp', body)
-
-// export const LoginAccount = (body: { userName: string; password: string }) =>
-//   http.post<AuthResponse>('/auth/signIn', body)
-
-// export const Logout = () => http.post('/auth/logout')

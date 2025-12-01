@@ -1,6 +1,7 @@
 export type Role = 'USER' | 'ADMIN' | 'DOCTOR' | 'EMPLOYEE' // Thêm string để linh hoạt
 
 export interface User {
+  id?: number
   userId: number // Integer trong backend → number trong frontend
   fullName: string
   email: string

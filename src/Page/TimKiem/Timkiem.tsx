@@ -101,7 +101,7 @@ export default function Timkiem() {
   return (
     <div className='bg-[url("/src/imgs/banner.jpg")] h-[600px] bg-cover bg-center relative'>
       {/* Overlay gradient để text dễ đọc hơn */}
-      <div className='absolute inset-0 bg-gradient-to-r from-[#2D5A3D]/70 to-[#FF6B6B]/50'></div>
+      <div className='absolute inset-0 bg-gradient-to-r from-[#DCEDC2]/70 to-neutral-400/50'></div>
 
       <div className='relative container mx-auto px-4 h-full flex flex-col justify-center'>
         {/* Main Heading */}
@@ -121,15 +121,15 @@ export default function Timkiem() {
         <div className='max-w-4xl mx-auto w-full'>
           {/* Search Box - ĐÃ SỬA */}
           <div className='relative group'>
-            <div className='absolute -inset-1 bg-gradient-to-r from-[#DCEDC2] to-[#FFAAAC] rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200'></div>
+            <div className='absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-200 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200'></div>
             <div className='relative'>
               <input
                 type='text'
                 placeholder='Tìm kiếm bác sĩ, chuyên khoa, bệnh viện...'
-                className='w-full px-8 py-5 text-lg rounded-2xl border-2 border-white/30 bg-white shadow-2xl focus:outline-none focus:border-[#2D5A3D] focus:bg-white transition-all duration-300 placeholder-gray-500 pr-16'
+                className='w-full px-8 py-5 text-lg rounded-2xl border-2 border-white/30 bg-white shadow-2xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all duration-300 placeholder-gray-500 pr-16'
                 // ĐÃ XÓA: backdrop-blur-sm và bg-white/95
               />
-              <button className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] text-white p-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105'>
+              <button className='absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-cyan-200 text-white p-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'

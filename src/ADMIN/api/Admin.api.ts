@@ -1,12 +1,10 @@
 import type { SuccessResponseApi, SuccessResponseApi1 } from 'src/types/utils.type'
 import http from 'src/utils/http'
-import type { AllUser } from '../types/Admin.type'
+import type { AllUser, schedules } from '../types/Admin.type'
 import type { QueryConfig } from '../Pages/QlyKhachHang/QlyKhachHang'
 import type { User } from 'src/types/user.type'
-
-// interface active {
-//   active: boolean
-// }
+import type { DoctorAppointment, DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
+import type { QueryConfig1 } from '../Pages/AllDoctor/AllDoctor'
 
 const AllUserAPI = {
   getAllUser(params?: QueryConfig) {
@@ -17,7 +15,7 @@ const AllUserAPI = {
     }
     return http.get<SuccessResponseApi<AllUser>>('/api/users', { params: springParams })
   },
-  AddUserAPI(bodyuser: Omit<User, 'userId' | 'address' | 'createdAt' | 'Active' | 'role'>) {
+  AddUserAPI(bodyuser: Omit<User, 'userId' | 'address' | 'createdAt' | 'Active' | 'role' | 'id' | 'active'>) {
     return http.post<User>('/api/users', bodyuser)
   },
   updateUserAPI(id: string | number, user: Omit<User, 'userId' | 'createdAt' | 'role' | 'active' | 'password'>) {
@@ -35,6 +33,42 @@ const AllUserAPI = {
   },
   CapNhapRole(body: { userId: number; roleId: number }) {
     return http.post<SuccessResponseApi1<User>>('/api/users/assign-role', body)
+  },
+  XoaLichHen(id: string | number) {
+    //new
+    return http.delete(`/api/appointments/${id}`)
+  }, //new
+  UpdateLichHen(id: string | number, body: { status: string }) {
+    return http.put(`/api/appointments/${id}`, body)
+  },
+  ViewLichHenUser(params?: QueryConfig) {
+    const springParams = {
+      page: params?.page ? parseInt(params.page) - 1 : 0, // Spring Boot bắt đầu từ 0
+      size: params?.size || '10'
+    }
+    return http.get<SuccessResponseApi<DoctorAppointment>>('api/appointments', { params: springParams })
+  },
+  putCancelAppointment(id: number) {
+    return http.put<SuccessResponseApi1<DoctorAppointment>>(`api/appointments/${id}/cancel-user`)
+  },
+  getAppointment(id: number) {
+    return http.get<SuccessResponseApi1<DoctorAppointment>>(`api/appointments/${id}`)
+  },
+  getAllDoctor(params?: QueryConfig1) {
+    const springParams = {
+      page: params?.page ? parseInt(params.page) - 1 : 0, // Spring Boot bắt đầu từ 0
+      size: params?.size || '10'
+    }
+    return http.get<SuccessResponseApi<DoctorDepartment>>('api/doctors', { params: springParams })
+  },
+  getViewSchedulesDoctor(id: number | string) {
+    return http.get<SuccessResponseApi<schedules>>(`api/schedules/doctor/${id}`)
+  },
+  postScheludes(body: { doctorId: number; dayOfWeek: string; startAt: string; endAt: string }) {
+    return http.post('/api/schedules', body)
+  },
+  deleteSchedules(id: number) {
+    return http.delete(`api/schedules/${id}`)
   }
 }
 

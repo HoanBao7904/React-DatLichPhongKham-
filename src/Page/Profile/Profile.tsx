@@ -53,7 +53,7 @@ export default function Profile() {
   const profile = profileData?.data.data
 
   useEffect(() => {
-    console.log('useEffect chạy, profile:', profile)
+    // console.log('useEffect chạy, profile:', profile)
     if (profile) {
       setValue('fullName', profile.fullName || '')
       setValue('address', profile.address || '')
@@ -80,113 +80,6 @@ export default function Profile() {
     toast.success(res.data.message)
   })
 
-  // return (
-  //   <div className='grid grid-cols-1 gap-6 md:grid-cols-12'>
-  //     <div className='md:col-span-3 lg:col-span-2'>
-  //       <UserSideNav />
-  //     </div>
-  //     <div className='md:col-span-9 lg:col-span-10'>
-  //       <div className='rounded-sm bg-white px-7 pb-20 shadow'>
-  //         <div className='border-b border-b-gray-400 py-5'>
-  //           <h1 className='text-lg font-medium text-black capitalize'>Hồ Sơ Của Tôi</h1>
-  //           <div className='text-sm text-gray-300 mt-1'>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
-  //         </div>
-  //         <form
-  //           className='mt-8 flex flex-col-reverse md:flex-row md:items-start'
-  //           key={profile?.userId}
-  //           onSubmit={onSubmit}
-  //         >
-  //           <div className='mt-6 flex-grow pr-12 md:mt:0'>
-  //             <div className='flex flex-wrap'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize'>Email</div>
-  //               <div className='w-[80%] pl-5'>
-  //                 <Input
-  //                   classNameInput='p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
-  //                   register={register}
-  //                   errorsMessage={errors.email?.message}
-  //                   placeholder='email'
-  //                   name='email'
-  //                 />
-  //               </div>
-  //             </div>
-  //             <div className='flex flex-wrap mt-6'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize'>Tên Đăng Nhập</div>
-  //               <div className='w-[80%] pl-5'>
-  //                 <Input
-  //                   classNameInput='pointer-events-none p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
-  //                   register={register}
-  //                   errorsMessage={errors.userName?.message}
-  //                   placeholder='Tên đăng nhập'
-  //                   name='userName'
-  //                 />
-  //               </div>
-  //             </div>
-  //             <div className='flex flex-wrap mt-6'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize'>Tên</div>
-  //               <div className='w-[80%] pl-5'>
-  //                 <Input
-  //                   classNameInput='p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
-  //                   register={register}
-  //                   errorsMessage={errors.fullName?.message}
-  //                   placeholder='họ và tên'
-  //                   name='fullName'
-  //                 />
-  //               </div>
-  //             </div>
-
-  //             <div className='flex flex-wrap mt-6'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize'>số điện thoại</div>
-  //               <div className='w-[80%] pl-5'>
-  //                 <Controller
-  //                   control={control}
-  //                   name='phone'
-  //                   render={({ field }) => (
-  //                     <InputNumber
-  //                       classNameInput='p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
-  //                       placeholder='số điện thoại'
-  //                       errorMassage={errors.phone?.message}
-  //                       {...field}
-  //                       onChange={field.onChange}
-  //                     />
-  //                   )}
-  //                 />
-  //               </div>
-  //             </div>
-  //             <div className='flex flex-wrap mt-6'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize'>địa chỉ</div>
-  //               <div className='w-[80%] pl-5'>
-  //                 <Input
-  //                   classNameInput='p-2 w-full outline-none border border-gray-300 focus:border-gray-500 rounded-sm focus:shadow-sm'
-  //                   register={register}
-  //                   errorsMessage={errors.address?.message}
-  //                   placeholder='địa chỉ'
-  //                   name='address'
-  //                 />
-  //               </div>
-  //             </div>
-  //             <Controller
-  //               control={control}
-  //               name='dateOfBirth'
-  //               render={({ field }) => <DateSelect value={field.value} onChange={field.onChange} />}
-  //             />
-
-  //             <div className='flex flex-wrap mt-6'>
-  //               <div className='w-[20%] truncate pt-3 text-right capitalize' />
-  //               <div className='w-[80%] pl-5'>
-  //                 <Button
-  //                   className='flex items-center bg-blue-500 text-sm text-white hover:bg-blue-600 rounded-sm capitalize h-10 px-6'
-  //                   type='submit'
-  //                 >
-  //                   lưu
-  //                 </Button>
-  //               </div>
-  //             </div>
-  //           </div>
-  //         </form>
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
   return (
     <div className='min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] py-8'>
       <div className='container mx-auto px-4'>
@@ -200,7 +93,7 @@ export default function Profile() {
           <div className='md:col-span-9 lg:col-span-9'>
             <div className='rounded-2xl bg-white shadow-2xl overflow-hidden'>
               {/* Header */}
-              <div className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] px-8 py-6'>
+              <div className='bg-gradient-to-r from-blue-600 to-cyan-200 px-8 py-6'>
                 <h1 className='text-2xl font-bold text-white'>Hồ Sơ Của Tôi</h1>
 
                 <p className='text-white/80 mt-2'>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
@@ -320,7 +213,7 @@ export default function Profile() {
                 <div className='flex justify-between mt-8 pt-6 border-t border-gray-200'>
                   <Link
                     to={path.home}
-                    className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] text-white font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2'
+                    className='bg-gradient-to-r from-blue-400 to-cyan-200 text-white font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2'
                     type='submit'
                   >
                     <div className='flex items-start justify-center'>
@@ -339,7 +232,7 @@ export default function Profile() {
                     </div>
                   </Link>
                   <Button
-                    className='bg-gradient-to-r from-[#2D5A3D] to-[#FF6B6B] text-white font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2'
+                    className='bg-gradient-to-r from-blue-400 to-cyan-200 text-white font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center space-x-2'
                     type='submit'
                   >
                     <div className='flex items-start justify-center'>

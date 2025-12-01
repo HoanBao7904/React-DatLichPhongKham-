@@ -4,7 +4,7 @@ export interface SuccessResponseApi<Data> {
   code: string
   data?: Data[]
   size: number
-  thời_gian: string
+  'thời gian': string
   page?: number
   pageSize?: number
   totalElements?: number

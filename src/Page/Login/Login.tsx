@@ -31,7 +31,7 @@ export default function Login() {
   const onSubmit = handleSubmit((data) => {
     LoginMutation.mutate(data, {
       onSuccess: (data) => {
-        console.log(data)
+        // console.log(data)
         SetIsAuthenticated(true)
         setProfile(data.data.data!.user)
         navigate('/')
@@ -46,12 +46,12 @@ export default function Login() {
               message: 'Sai tên đăng nhập hoặc mật khẩu'
             })
           }
-          if (errorData?.message === 'Username or password is incorrect' && errorData.operationType === 'Failure') {
-            setError('password', {
-              type: 'server',
-              message: 'Sai tên đăng nhập hoặc mật khẩu'
-            })
-          }
+          //   if (errorData?.message === 'Username or password is incorrect' && errorData.operationType === 'Failure') {
+          //     setError('password', {
+          //       type: 'server',
+          //       message: 'Sai tên đăng nhập hoặc mật khẩu'
+          //     })
+          //   }
         }
       }
     })
@@ -125,13 +125,13 @@ export default function Login() {
   //   </div>
   // )
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-[#DCEDC2] to-[#FFDBB5] rounded-[12px] w-full'>
+    <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-300 to-cyan-100 rounded-[12px] w-full'>
       <div className='flex max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl'>
         {/* Left side - Form */}
         <div className='flex-1 p-12 flex flex-col justify-center'>
           <div className='text-center mb-8'>
-            <h2 className='text-4xl font-bold text-[#2D5A3D] mb-3'>Chào Mừng Trở Lại</h2>
-            <p className='text-gray-600 text-lg'>Rất vui được gặp lại bạn tại không gian đặc biệt này</p>
+            <h2 className='text-4xl font-bold text-blue-600 mb-3'>Chào Mừng Trở Lại</h2>
+            <p className='text-gray-500 text-lg'>Rất vui được gặp lại bạn tại không gian đặc biệt này</p>
           </div>
 
           <form className='space-y-6' onSubmit={onSubmit} noValidate>
@@ -157,13 +157,13 @@ export default function Login() {
                 <input type='checkbox' className='rounded text-[#2D5A3D] focus:ring-[#2D5A3D]' />
                 <span>Ghi nhớ đăng nhập</span>
               </label>
-              <a href='#' className='text-[#FF6B6B] hover:text-[#ff5252] font-medium transition-colors'>
+              <a href='#' className='text-cyan-400 hover:text-[#ff5252] font-medium transition-colors'>
                 Quên mật khẩu?
               </a>
             </div>
 
             <Button
-              className='w-full py-4 bg-gradient-to-r from-[#2D5A3D] to-[#3a7a4f] text-white rounded-xl hover:from-[#245232] hover:to-[#2D5A3D] transition-all duration-300 font-semibold text-base shadow-md hover:shadow-lg'
+              className='w-full py-4 bg-gradient-to-r from-blue-400 to-cyan-200 text-white rounded-xl hover:from-blue-600 hover:to-cyan-400 transition-all duration-300 font-semibold text-base shadow-md hover:shadow-lg'
               type='submit'
               isLoding={LoginMutation.isPending}
               disabled={LoginMutation.isPending}
@@ -177,7 +177,7 @@ export default function Login() {
               Chưa có tài khoản?{' '}
               <a
                 href={path.register}
-                className='text-[#2D5A3D] font-semibold hover:text-[#245232] transition-colors underline'
+                className='text-blue-700 font-semibold hover:text-[#245232] transition-colors underline'
               >
                 Đăng ký ngay
               </a>
@@ -186,7 +186,7 @@ export default function Login() {
         </div>
 
         {/* Right side - Illustration */}
-        <div className='hidden md:flex flex-1 bg-gradient-to-br from-[#DCEDC2] to-[#FFDBB5] justify-center items-center p-8 relative'>
+        <div className='hidden md:flex flex-1 bg-gradient-to-br from-blue-300 to-cyan-200 justify-center items-center p-8 relative'>
           <div className='absolute inset-0 bg-black/5'></div>
           <div className='text-center z-10'>
             <img
@@ -194,8 +194,8 @@ export default function Login() {
               alt='Medical illustration'
               className='w-full h-64 object-contain rounded-md transform hover:scale-105 transition-transform duration-500 mb-4'
             />
-            <h3 className='text-2xl font-bold text-[#2D5A3D]'>Hệ Thống Y Tế MedPro</h3>
-            <p className='text-gray-700 mt-2'>Chăm sóc sức khỏe toàn diện</p>
+            <h3 className='text-2xl font-bold text-white'>Hệ Thống Y Tế MedPro</h3>
+            <p className='text-slate-400 mt-2'>Chăm sóc sức khỏe toàn diện</p>
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function Register() {
   })
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-[#DCEDC2] to-[#FFDBB5] rounded-[12px] w-full'>
+    <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-200 to-cyan-200 rounded-[12px] w-full'>
       <div className='flex max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl'>
         {/* Left side - Form */}
         <div className='flex-1 p-8 flex flex-col justify-center'>
@@ -124,7 +124,8 @@ export default function Register() {
 
             <Button
               type='submit'
-              className='w-full py-3 bg-gradient-to-r from-[#2D5A3D] to-[#3a7a4f] text-white rounded-xl hover:from-[#245232] hover:to-[#2D5A3D] transition-all duration-300 font-semibold text-base shadow-md hover:shadow-lg'
+              className='w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-200 text-white rounded-xl hover:from-blue-600 hover:to-cyan-300
+               transition-all duration-300 font-semibold text-base shadow-md hover:shadow-lg'
               isLoding={registerAccountMutation.isPending}
               disabled={registerAccountMutation.isPending}
             >
@@ -137,7 +138,7 @@ export default function Register() {
               Đã có tài khoản?{' '}
               <a
                 href={path.login}
-                className='text-[#2D5A3D] font-semibold hover:text-[#245232] transition-colors underline'
+                className='text-blue-600 font-semibold hover:text-cyan-400 transition-colors underline'
               >
                 Đăng Nhập
               </a>
@@ -146,7 +147,7 @@ export default function Register() {
         </div>
 
         {/* Right side - Illustration */}
-        <div className='hidden md:flex flex-1 bg-gradient-to-br from-[#DCEDC2] to-[#FFDBB5] justify-center items-center p-8 relative'>
+        <div className='hidden md:flex flex-1 bg-gradient-to-br from-blue-300 to-cyan-200 justify-center items-center p-8 relative'>
           <div className='absolute inset-0 bg-black/5'></div>
           <div className='text-center z-10'>
             <img

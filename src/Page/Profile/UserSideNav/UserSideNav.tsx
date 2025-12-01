@@ -35,13 +35,13 @@ export default function UserSideNav() {
   return (
     <div className='bg-white rounded-2xl shadow-xl overflow-hidden'>
       {/* User Info Header */}
-      <div className='bg-gradient-to-r from-[#DCEDC2] to-[#FFDBB5] p-6'>
+      <div className='bg-gradient-to-r from-blue-200 to-cyan-100 p-6'>
         <div className='flex items-center space-x-4'>
           <div className='relative'>
             <div className='w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg border-2 border-white'>
               <span className='text-2xl font-bold text-[#2D5A3D]'>B</span>
             </div>
-            <div className='absolute -bottom-1 -right-1 w-5 h-5 bg-[#FF6B6B] rounded-full border-2 border-white flex items-center justify-center'>
+            <div className='absolute -bottom-1 -right-1 w-5 h-5 bg-cyan-300 rounded-full border-2 border-white flex items-center justify-center'>
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' className='w-3 h-3'>
                 <path d='M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z' />
               </svg>
@@ -73,9 +73,9 @@ export default function UserSideNav() {
       <div className='p-6 space-y-4'>
         <Link
           to=''
-          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-[#DCEDC2] hover:to-[#FFDBB5] transition-all duration-300 group'
+          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-blue-200 to-cyan-100 transition-all duration-300 group'
         >
-          <div className='w-8 h-8 rounded-full bg-[#2D5A3D] flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
+          <div className='w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -96,9 +96,9 @@ export default function UserSideNav() {
 
         <Link
           to=''
-          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-[#DCEDC2] hover:to-[#FFDBB5] transition-all duration-300 group'
+          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-blue-200 to-cyan-100 transition-all duration-300 group'
         >
-          <div className='w-8 h-8 rounded-full bg-[#FF6B6B] flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
+          <div className='w-8 h-8 rounded-full bg-orange-300 flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -120,9 +120,9 @@ export default function UserSideNav() {
         {/* Thêm các menu khác nếu cần */}
         <Link
           to=''
-          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-[#DCEDC2] hover:to-[#FFDBB5] transition-all duration-300 group'
+          className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-blue-200 to-cyan-100 transition-all duration-300 group'
         >
-          <div className='w-8 h-8 rounded-full bg-[#2D5A3D] flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
+          <div className='w-8 h-8 rounded-full bg-cyan-300 flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
