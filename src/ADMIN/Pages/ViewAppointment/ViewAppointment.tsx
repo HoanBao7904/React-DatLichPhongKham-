@@ -39,7 +39,7 @@ export default function ViewAppointmentAdmin() {
     onSuccess: (_, id) => {
       toast.success(`xóa user có Userid:${id}`)
       queryClient.invalidateQueries({
-        queryKey: ['/api/appointments']
+        queryKey: ['api/appointments']
       })
     },
     onError: () => {

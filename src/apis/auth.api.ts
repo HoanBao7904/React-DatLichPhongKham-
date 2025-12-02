@@ -1,5 +1,3 @@
-// import type { SuccessResponseApi } from 'src/types/utils.type'
-
 import type { LoginResponse } from 'src/types/auth.type'
 import type { RegisterBody } from 'src/types/user.type'
 import http from 'src/utils/http'

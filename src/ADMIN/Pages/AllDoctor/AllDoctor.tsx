@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import { Link } from 'react-router-dom'
 import AllUserAPI from 'src/ADMIN/api/Admin.api'
-import { path } from 'src/contanis/path'
+import Paginate from 'src/components/Paginate'
 import useQueryParam from 'src/hooks/useQueryParam'
 
 export type QueryConfig1 = {
@@ -17,10 +17,10 @@ export default function AllDoctor() {
     size: queryParams.size || '10'
   })
   const { data } = useQuery({
-    queryKey: ['api/doctors'],
+    queryKey: ['api/doctors', queryParams],
     queryFn: () => AllUserAPI.getAllDoctor(queryconfig)
   })
-
+  const totalPages = data?.data.totalPages
   const allDoctor = data?.data.data || []
 
   console.log(data)
@@ -28,52 +28,13 @@ export default function AllDoctor() {
   if (allDoctor) {
     return (
       <div className='min-h-screen bg-gray-50 p-6'>
-        {/* Loading Skeleton */}
-        {/* {!responseData && (
-        <div className='space-y-4'>
-          <div className='h-8 bg-gray-200 rounded w-1/4 animate-pulse'></div>
-          <div className='grid gap-4'>
-            {[...Array(10)].map((_, index) => (
-              <div key={index} className='h-16 bg-gray-200 rounded animate-pulse'></div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
         {/* Header với nút Add */}
         <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4'>
           <div>
             <h1 className='text-3xl font-bold text-gray-800 '>Quản lý Lịch Làm việc</h1>
-            <div className='flex items-center'>
-              <Link to={path.login} className='mt-2'>
-                {/* //onClick={handleLogout} */}
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth={1.5}
-                  stroke='currentColor'
-                  className='size-6 text-black font-bold'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75'
-                  />
-                </svg>
-              </Link>
-              <p className='text-gray-600 ml-3 mt-2'>Quản lý thông tin và lịch làm việc của bác sĩ trong hệ thống</p>
-            </div>
+
+            <p className='text-gray-600 ml-3 mt-2'>Quản lý thông tin và lịch làm việc của bác sĩ trong hệ thống</p>
           </div>
-          <Link
-            to='add'
-            className='bg-gradient-to-r from-blue-500 to-cyan-200 hover:from-blue-500 hover:to-cyan-300 text-white px-6 py-3 rounded-xl flex items-center space-x-2 transition-all duration-300 hover:shadow-lg hover:scale-110'
-          >
-            <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
-            </svg>
-            {/* <span className='font-semibold'>Thê</span> */}
-          </Link>
         </div>
 
         {/* Bảng */}
@@ -146,53 +107,26 @@ export default function AllDoctor() {
                       </td>
                       <td className='px-6 py-4 text-center'>
                         <div className='flex justify-center space-x-2'>
-                          <button
-                            title='tắt trạng thái hoạt động'
-                            className='p-2 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 hover:scale-110 transition-all duration-200 border border-blue-200'
-                          >
-                            <svg
-                              fill='#000000'
-                              width='16px'
-                              height='16px'
-                              viewBox='0 0 38.4 38.4'
-                              xmlns='http://www.w3.org/2000/svg'
-                            >
-                              <path
-                                d='M12.842 19.206c0 -3.506 2.853 -6.358 6.358 -6.358 1.369 0 2.609 0.473 3.645 1.214L14.056 22.851c-0.742 -1.036 -1.214 -2.276 -1.214 -3.645ZM34.345 2.56l1.501 1.501 -11.475 11.472 -8.844 8.844 -11.472 11.475 -1.501 -1.501 5.676 -5.674c-0.536 -0.345 -1.083 -0.718 -1.643 -1.142C3.985 25.507 1.793 22.792 0.237 19.681L0 19.208l0.235 -0.475C3.989 11.182 11.256 6.489 19.2 6.489c2.228 0 4.406 0.371 6.477 1.1 0.846 0.265 1.71 0.64 2.573 1.068zm-2.428 8.423C34.46 12.973 36.622 15.667 38.169 18.74l0.231 0.466 -0.231 0.464c-3.754 7.568 -11.021 12.252 -18.969 12.252 -2.225 0 -4.408 -0.36 -6.485 -1.102l-0.466 -0.17 5.324 -5.326c0.521 0.142 1.06 0.239 1.628 0.239 3.506 0 6.358 -2.853 6.358 -6.358 0 -0.568 -0.098 -1.106 -0.237 -1.628Z'
-                                fill-rule='evenodd'
-                              />
-                            </svg>
-                          </button>
                           <Link
-                            // to=''
-                            // to={`edit/:id${user.userId}`}
                             to={`/admin/lich-lam-viec-cu-the/${item.id}`}
                             title='Chỉnh sửa'
                             className='p-2 text-green-600 bg-green-50 rounded-lg hover:bg-green-100 hover:scale-110 transition-all duration-200 border border-green-200'
                           >
-                            <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                            <svg
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              strokeWidth='1.5'
+                              stroke='currentColor'
+                              className='size-6'
+                            >
                               <path
                                 strokeLinecap='round'
                                 strokeLinejoin='round'
-                                strokeWidth={2}
-                                d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z'
+                                d='M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z'
                               />
                             </svg>
                           </Link>
-                          <button
-                            title='Xóa'
-                            //   onClick={() => handleDelete(user?.userId)}
-                            className='p-2 text-red-600 bg-red-50 rounded-lg hover:bg-red-100 hover:scale-110 transition-all duration-200 border border-red-200'
-                          >
-                            <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                              <path
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                                strokeWidth={2}
-                                d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16'
-                              />
-                            </svg>
-                          </button>
                         </div>
                       </td>
                     </tr>
@@ -226,11 +160,11 @@ export default function AllDoctor() {
         </div>
 
         {/* Phân trang */}
-        {/* {totalPages && (
-        <div className='mt-6'>
-          <Paginate queryConfig={queryConfig} totalPages={totalPages} />
-        </div>
-      )} */}
+        {totalPages && (
+          <div className='mt-6'>
+            <Paginate queryConfig={queryconfig} totalPages={totalPages} />
+          </div>
+        )}
       </div>
     )
   }

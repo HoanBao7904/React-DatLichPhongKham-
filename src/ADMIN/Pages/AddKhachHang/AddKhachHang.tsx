@@ -14,9 +14,6 @@ import { isAxios400, isAxios409 } from 'src/utils/utils'
 type FromData = Omit<User, 'userId' | 'address' | 'createdAt' | 'Active' | 'role' | 'id' | 'active'>
 
 export default function AddKhachHang() {
-  // const addMatch = useMatch('admin/add')
-  // const isAddMode = Boolean(addMatch) //có data ở chế độ thêm ko có edit
-  // console.log(isAddMode)
   const {
     register,
     control,
@@ -74,7 +71,7 @@ export default function AddKhachHang() {
         {/* Header */}
         <div className='flex items-center space-x-4 mb-4'>
           <Link
-            to='/admin'
+            to='/admin/qlyKhachHang'
             className='bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors'
           >
             <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>

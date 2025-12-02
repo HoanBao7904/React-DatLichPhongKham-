@@ -15,8 +15,7 @@ import Sidebar from './ADMIN/Layout/Sidebar'
 import AddKhachHang from './ADMIN/Pages/AddKhachHang/AddKhachHang'
 import EditKhachHang from './ADMIN/Pages/EditKhachHang/EditKhachHang'
 import AllDoctors from './KHACHHANG/AllDocteors'
-import ProfileAppointmen from './KHACHHANG/DatLichKham/ThongTinDatKham'
-import EditThongTin from './KHACHHANG/DatLichKham/ThongTinDatKham/EditThongTin'
+
 import DoctorDetail from './KHACHHANG/DoctorDetail'
 import UserLayout from './DOCTOR/UserLayout'
 import ViewWord from './DOCTOR/pages/ViewWord'
@@ -27,6 +26,8 @@ import ViewAppointmentKH from './KHACHHANG/ViewAppointmentKH'
 import ViewAppointmentAdmin from './ADMIN/Pages/ViewAppointment'
 import AllDoctor from './ADMIN/Pages/AllDoctor'
 import DoctorSchedule from './ADMIN/Pages/SchedulesDoctor/SchedulesDoctor'
+import ProfileAppointmen from './KHACHHANG/DatLichKham/ThongTinDatKham'
+import EditThongTin from './KHACHHANG/DatLichKham/ThongTinDatKham/EditThongTin'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -220,106 +221,3 @@ export default function useRouteElements() {
 
   return routeElements
 }
-
-// export default function useRouteElements() {
-//   const routeElements = useRoutes([
-//     {
-//       path: '/',
-//       index: true,
-//       element: (
-//         <MainLayout>
-//           <DoctorHome />
-//         </MainLayout>
-//       )
-//     },
-//     {
-//       path: '',
-//       element: (
-//         <ProtectedRoute>
-//           <Outlet />
-//         </ProtectedRoute>
-//       ),
-//        children: [
-//         // ADMIN Routes - chỉ ADMIN được truy cập
-//         {
-//           path: '/admin',
-//           element: (
-//             <ProtectedRoute requiredRole='ADMIN'>
-//               <AdminLayout>
-//                 <Outlet />
-//               </AdminLayout>
-//             </ProtectedRoute>
-//           ),
-//           children: [
-//             {
-//               path: '',
-//               element: <Navigate to='users' replace />
-//             },
-//             {
-//               path: 'users',
-//               element: <QlyKhachHang />
-//             },
-//             {
-//               path: 'dashboard',
-//               element: <div>Admin Dashboard</div>
-//             }
-//           ]
-//         },
-
-//         // DOCTOR Routes - chỉ DOCTOR được truy cập
-//         {
-//           path: '/doctor',
-//           element: (
-//             <ProtectedRoute requiredRole='DOCTOR'>
-//               <DoctorLayout>
-//                 <Outlet />
-//               </DoctorLayout>
-//             </ProtectedRoute>
-//           ),
-//           children: [
-//             {
-//               path: '',
-//               element: <div>Doctor Homepage</div>
-//             },
-//             {
-//               path: 'appointments',
-//               element: <div>Doctor Appointments</div>
-//             }
-//           ]
-//         },
-
-//         // EMPLOYEE Routes - chỉ EMPLOYEE được truy cập
-//         {
-//           path: '/employee',
-//           element: (
-//             <ProtectedRoute requiredRole='EMPLOYEE'>
-//               <EmployeeLayout>
-//                 <Outlet />
-//               </EmployeeLayout>
-//             </ProtectedRoute>
-//           ),
-//           children: [
-//             {
-//               path: '',
-//               element: <div>Employee Homepage</div>
-//             }
-//           ]
-//         },
-
-//     {
-//       path: '',
-//       element: <RejectedRouter />,
-//       children: [
-//         {
-//           path: path.login,
-//           element: <Login />
-//         },
-//         {
-//           path: path.register,
-//           element: <Register />
-//         }
-//       ]
-//     }
-//   ])
-//   return routeElements
-// }

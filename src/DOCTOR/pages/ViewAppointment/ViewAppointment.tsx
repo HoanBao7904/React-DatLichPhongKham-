@@ -210,43 +210,12 @@ export default function ViewAppointment() {
             })}
           </div>
 
-          {/* Pagination */}
-          {/* <div className='bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6'>
-            <div className='flex-1 flex justify-between items-center'>
-              <div>
-                <p className='text-sm text-gray-700'>
-                  Hiển thị <span className='font-medium'>{sampleData.data.length}</span> trong tổng số{' '}
-                  <span className='font-medium'>{sampleData.totalElements}</span> kết quả
-                </p>
-              </div>
-              <div className='flex space-x-2'>
-                <button
-                  className='relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
-                  disabled={sampleData.page === 0}
-                >
-                  Trước
-                </button>
-                <span className='relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700'>
-                  Trang {sampleData.page + 1} / {sampleData.totalPages}
-                </span>
-                <button
-                  className='relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
-                  disabled={sampleData.page + 1 >= sampleData.totalPages}
-                >
-                  Tiếp
-                </button>
-              </div>
-            </div>
-          </div> */}
           {totalPages && (
             <div className='mt-6'>
               <Paginate queryConfig={queryConfig} totalPages={totalPages} />
             </div>
           )}
         </div>
-
-        {/* Footer info */}
-        {/* <div className='mt-4  text-xl text-gray-500 font-bold'>Dữ liệu được cập nhật lúc: {dataTimeLine}</div> */}
       </div>
     </div>
   )

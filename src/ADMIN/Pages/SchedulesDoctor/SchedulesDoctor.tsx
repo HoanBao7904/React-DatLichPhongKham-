@@ -3,7 +3,7 @@ import { addDays, addWeeks, startOfWeek, subWeeks, format, isSameDay, parseISO }
 import { vi } from 'date-fns/locale'
 import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import AllUserAPI from 'src/ADMIN/api/Admin.api'
 
@@ -18,6 +18,7 @@ export default function SchedulesDoctor() {
   const [viewDate, setViewDate] = useState(new Date())
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { id } = useParams()
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
 
   const { data } = useQuery({
@@ -119,6 +120,9 @@ export default function SchedulesDoctor() {
     })
     setIsModalOpen(true)
   }
+  const handleBack = () => {
+    navigate('/admin/quan-ly-lich-lam-viec')
+  }
 
   return (
     <div className='min-h-screen bg-gray-50 p-6'>
@@ -132,6 +136,23 @@ export default function SchedulesDoctor() {
         </div>
 
         <div className='flex items-center gap-3 mt-4 md:mt-0'>
+          <button
+            onClick={handleBack}
+            className='px-4 py-2 rounded-lg bg-slate-100 text-black font-medium hover:bg-slate-200 transition flex items-center gap-2'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='size-6'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18' />
+            </svg>
+            Quay Lại
+          </button>
+
           {/* Nút THÊM LỊCH MỚI */}
           <button
             onClick={openModal}

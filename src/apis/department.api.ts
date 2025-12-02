@@ -1,4 +1,3 @@
-// import type { DepartMent, DepartMentFillConfig } from 'src/types/dePartMent.type'
 import type { DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
 import type { DepartMentDetailResponse, DepartMentListResponse } from 'src/types/department.type'
 import type { SuccessResponseApi } from 'src/types/utils.type'
@@ -6,11 +5,6 @@ import http from 'src/utils/http'
 
 const URL = 'api/departments'
 const DePartMentsApi = {
-  // getDepartment(params: DepartMentFillConfig) {
-  //   return http.get<DepartMentListResponse>(URL, {
-  //     params
-  //   })
-  // },
   getDepartment() {
     return http.get<DepartMentListResponse>(URL)
   },

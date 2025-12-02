@@ -3,10 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { format, startOfWeek, addDays, addWeeks, subWeeks, isSameDay, parseISO } from 'date-fns'
 import { vi } from 'date-fns/locale'
 import JobDoctor from 'src/DOCTOR/APIS/job.api'
-// Giả định các imports này đã có và hoạt động
-// import JobDoctor from 'src/DOCTOR/APIS/job.api';
 
-// Cần định nghĩa lại interface Schedule nếu chưa có trong file này
 interface Schedule {
   id: number
   dayOfWeek: string
@@ -76,17 +73,6 @@ export default function DoctorScheduleView() {
         </div>
 
         <div className='flex items-center gap-3 mt-4 md:mt-0'>
-          {/* Nút THÊM LỊCH MỚI */}
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className='px-4 py-2 rounded-lg bg-green-500 text-blue-500 font-medium hover:bg-green-600 transition flex items-center gap-2'
-          >
-            <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6m0 0v6m0-6h6m-6 0H6' />
-            </svg>
-            Thêm Lịch
-          </button>
-
           {/* Các nút điều hướng tuần */}
           <button onClick={prevWeek} className='p-2 rounded-lg border hover:bg-gray-100 transition'>
             &lt; Tuần trước

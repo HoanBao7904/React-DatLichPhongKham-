@@ -1,27 +1,4 @@
 export default function AppointmentItem() {
-  // const formatDateTime = (dateTimeString) => {
-  //   const date = new Date(dateTimeString)
-  //   return {
-  //     date: date.toLocaleDateString('vi-VN'),
-  //     time: date.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
-  //   }
-  // }
-
-  // const getStatusBadge = (status) => {
-  //   const statusConfig = {
-  //     CONFIRMED: { color: 'bg-green-100 text-green-800 border-green-200', text: 'Đã xác nhận' },
-  //     PENDING: { color: 'bg-yellow-100 text-yellow-800 border-yellow-200', text: 'Chờ xác nhận' },
-  //     CANCELLED: { color: 'bg-red-100 text-red-800 border-red-200', text: 'Đã hủy' },
-  //     COMPLETED: { color: 'bg-blue-100 text-blue-800 border-blue-200', text: 'Đã hoàn thành' }
-  //   }
-
-  //   const config = statusConfig[status] || { color: 'bg-gray-100 text-gray-800 border-gray-200', text: status }
-
-  //   return <span className={`px-3 py-1 rounded-full text-xs font-medium border ${config.color}`}>{config.text}</span>
-  // }
-
-  // const datetime = formatDateTime(appointment.appointmentDateTime)
-
   return (
     <div className='p-6 hover:bg-gray-50 transition-colors duration-200'>
       <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>

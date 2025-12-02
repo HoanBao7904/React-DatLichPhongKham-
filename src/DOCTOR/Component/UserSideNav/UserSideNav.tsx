@@ -1,69 +1,26 @@
+import { useMutation } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import AuthApi from 'src/apis/auth.api'
 import { AppContext } from 'src/contexts/app.context'
 // import { path } from 'src/contexts/path'
 
 export default function UserSideNav() {
-  const { profile } = useContext(AppContext)
-  // return (
-  //   <div>
-  //     <div className='flex items-center py-4 border-b border-b-gray-200'>
-  //       <Link to='' className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-black'>
-  //         {/* <img src={profile?. || Userimg} alt='' /> */}
-  //       </Link>
-  //       <div className='flex-grow pl-4'>
-  //         <div className='text-black mb-1 truncate text-left'>{profile?.fullName}</div>
-  //         <Link to='' className='flex items-center capitalize text-gray-500'>
-  //           Sửa hồ sơ
-  //         </Link>
-  //       </div>
-  //     </div>
-  //     <div className='mt-7'>
-  //       <Link
-  //         to='/doctor/doctorprofile'
-  //         className='flex items-center capitalize text-black hover:text-orange transition-colors'
-  //       >
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>tài khoản của tôi</div>
-  //       </Link>
+  const { profile, SetIsAuthenticated, setProfile } = useContext(AppContext)
 
-  //       <Link
-  //         to='/doctor/viewword'
-  //         className='flex items-center capitalize text-black hover:text-orange transition-colors mt-4'
-  //       >
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>Xem lịch làm việc</div>
-  //       </Link>
-  //       <Link
-  //         to='/doctor/appointment'
-  //         className='flex items-center capitalize text-black hover:text-orange transition-colors mt-4'
-  //       >
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>Xem cuộc hẹn</div>
-  //       </Link>
+  const logoutMutation = useMutation({
+    mutationFn: () => AuthApi.Logout(),
+    onSuccess: () => {
+      localStorage.removeItem('token') // hoặc sessionStorag
+      SetIsAuthenticated(false)
+      setProfile(null)
+    }
+  })
 
-  //       <Link to='' className='flex items-center capitalize text-black hover:text-orange transition-colors mt-4'>
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>Xem thông báo lịch hẹn</div>
-  //       </Link>
+  const handleLogout = () => {
+    logoutMutation.mutate()
+  }
 
-  //       <Link to='' className='flex items-center capitalize text-black hover:text-orange transition-colors mt-4'>
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>Xem thông tin khách hàng</div>
-  //       </Link>
-  //     </div>
-  //   </div>
-  // )
   return (
     <div className='bg-white rounded-lg shadow-sm border border-gray-100 p-6'>
       {/* Profile Section */}
@@ -74,7 +31,7 @@ export default function UserSideNav() {
         <div className='flex-grow pl-4'>
           <div className='text-gray-900 font-semibold text-lg mb-1 truncate'>{profile?.fullName || 'Người dùng'}</div>
           <Link
-            to='/doctor/profile/edit'
+            to='/doctor/doctorprofile'
             className='flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm font-medium'
           >
             <svg className='w-4 h-4 mr-1' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -87,6 +44,24 @@ export default function UserSideNav() {
             </svg>
             Sửa hồ sơ
           </Link>
+        </div>
+        <div>
+          <button onClick={handleLogout}>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='size-6'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75'
+              />
+            </svg>
+          </button>
         </div>
       </div>
 

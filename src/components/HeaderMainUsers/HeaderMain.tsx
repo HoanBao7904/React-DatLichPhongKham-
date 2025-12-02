@@ -1,5 +1,5 @@
 // import { dimensionValueTypes } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Popover from '../Popover'
 import { useContext } from 'react'
 import { AppContext } from 'src/contexts/app.context'
@@ -8,6 +8,7 @@ import { path } from 'src/contanis/path'
 import AuthApi from 'src/apis/auth.api'
 
 export default function HeaderMain() {
+  const navigate = useNavigate()
   const { SetIsAuthenticated, isAuthenticated, setProfile, profile } = useContext(AppContext)
   // const navigate = useNavigate()
   const logoutMutation = useMutation({
@@ -21,6 +22,9 @@ export default function HeaderMain() {
 
   const handleLogout = () => {
     logoutMutation.mutate()
+  }
+  const handleDatKham = () => {
+    navigate('/user/AllDoctor')
   }
 
   // return (
@@ -193,14 +197,17 @@ export default function HeaderMain() {
             renderPopover={
               <div className='bg-white shadow-xl rounded-lg border border-gray-100 min-w-48'>
                 <div className='flex flex-col py-2'>
-                  <button className='py-3 px-4 hover:bg-blue-50 text-gray-700 font-medium transition-colors text-left'>
-                    Đặt Khám Bác Sĩ
+                  <button
+                    onClick={handleDatKham}
+                    className='py-3 px-4 hover:bg-blue-50 text-gray-700 font-medium transition-colors text-left'
+                  >
+                    Đặt Khám Theo Bác Sĩ
                   </button>
-                  <button className='py-3 px-4 hover:bg-blue-50 text-gray-700 font-medium transition-colors text-left'>
-                    Đặt Khám Bệnh viện
-                  </button>
-                  <button className='py-3 px-4 hover:bg-blue-50 text-gray-700 font-medium transition-colors text-left'>
-                    Đặt Khám Phòng khám
+                  <button
+                    onClick={handleDatKham}
+                    className='py-3 px-4 hover:bg-blue-50 text-gray-700 font-medium transition-colors text-left'
+                  >
+                    Đặt Khám Theo Khoa
                   </button>
                 </div>
               </div>

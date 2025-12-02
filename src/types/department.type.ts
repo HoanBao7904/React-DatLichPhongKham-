@@ -28,8 +28,3 @@ export interface DepartMentDetailResponse {
   data: DepartMent // 👈 1 phòng ban
   'thời gian': string
 }
-
-// export interface DepartMentFillConfig {
-//   id?: number
-//   name?: boolean
-// }
