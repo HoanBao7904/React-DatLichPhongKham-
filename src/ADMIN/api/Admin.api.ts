@@ -5,6 +5,7 @@ import type { QueryConfig } from '../Pages/QlyKhachHang/QlyKhachHang'
 import type { User } from 'src/types/user.type'
 import type { DoctorAppointment, DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
 import type { QueryConfig1 } from '../Pages/AllDoctor/AllDoctor'
+import type { RatingReview } from 'src/apis/rating.api'
 
 const AllUserAPI = {
   getAllUser(params?: QueryConfig) {
@@ -69,6 +70,16 @@ const AllUserAPI = {
   },
   deleteSchedules(id: number) {
     return http.delete(`api/schedules/${id}`)
+  },
+  getAllReview(params?: QueryConfig) {
+    const springParams = {
+      page: params?.page ? parseInt(params.page) - 1 : 0, // Spring Boot bắt đầu từ 0
+      size: params?.size || '10'
+    }
+    return http.get<SuccessResponseApi<RatingReview>>('api/reviews', { params: springParams })
+  },
+  deleteReview(id: number) {
+    return http.delete(`api/reviews/${id}`)
   }
 }
 

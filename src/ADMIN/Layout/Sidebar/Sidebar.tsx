@@ -58,15 +58,15 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
           {/* Navigation Menu */}
           <ul className='space-y-2'>
             {[
-              { to: 'qlyKhachHang', label: 'Quản lý Khách hàng', icon: '👥' },
-              { to: 'quan-ly-bac-si', label: 'Quản lý Bác sĩ', icon: '👨‍⚕️' },
-              { to: 'quan-ly-lich-hen', label: 'Xem báo cáo thống kê', icon: '📊' },
-              { to: '/quan-ly-thanh-toan', label: 'Quản lý thanh toán', icon: '💳' },
-              { to: '/quan-ly-thong-bao', label: 'Quản lý thông báo', icon: '🔔' },
-              { to: 'ViewAppointmentAdmin', label: 'Quản lý cuộc hẹn', icon: '📅' },
-              { to: 'quan-ly-lich-lam-viec', label: 'Quản lý Lịch làm việc', icon: '⏰' },
-              { to: '/quan-ly-khoa', label: 'Quản lý khoa', icon: '🏥' },
-              { to: '/quan-ly-chuyen-khoa', label: 'Quản lý chuyên khoa', icon: '🎯' }
+              { to: 'qlyKhachHang', label: 'Quản lý Khách hàng' },
+              { to: 'quan-ly-bac-si', label: 'Quản lý Bác sĩ' },
+              { to: 'quan-ly-lich-hen', label: 'Xem báo cáo thống kê' },
+              { to: '/quan-ly-thanh-toan', label: 'Quản lý thanh toán' },
+              { to: '/quan-ly-thong-bao', label: 'Quản lý thông báo' },
+              { to: 'ViewAppointmentAdmin', label: 'Quản lý cuộc hẹn' },
+              { to: 'quan-ly-lich-lam-viec', label: 'Quản lý Lịch làm việc' },
+              { to: '/quan-ly-khoa', label: 'Quản lý khoa' },
+              { to: '/quan-ly-chuyen-khoa', label: 'Quản lý chuyên khoa' }
             ].map((item) => (
               <li key={item.to}>
                 <NavLink
@@ -82,11 +82,6 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                 >
                   {({ isActive }) => (
                     <>
-                      <span
-                        className={`text-lg mr-3 transition-transform duration-200 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}
-                      >
-                        {item.icon}
-                      </span>
                       <span className={`${isActive ? 'font-bold' : 'font-medium'}`}>{item.label}</span>
                       {isActive && <div className='ml-auto w-2 h-2 bg-blue-600 rounded-full'></div>}
                     </>

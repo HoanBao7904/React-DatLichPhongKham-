@@ -11,11 +11,9 @@ import QlyKhachHang from './ADMIN/Pages/QlyKhachHang'
 import EmployeeLayout from './layout/EmployeeLayout/EmployeeLayout'
 import DoctorHome from './Page/UserHome'
 import Profile from './Page/Profile'
-import Sidebar from './ADMIN/Layout/Sidebar'
 import AddKhachHang from './ADMIN/Pages/AddKhachHang/AddKhachHang'
 import EditKhachHang from './ADMIN/Pages/EditKhachHang/EditKhachHang'
 import AllDoctors from './KHACHHANG/AllDocteors'
-
 import DoctorDetail from './KHACHHANG/DoctorDetail'
 import UserLayout from './DOCTOR/UserLayout'
 import ViewWord from './DOCTOR/pages/ViewWord'
@@ -28,6 +26,11 @@ import AllDoctor from './ADMIN/Pages/AllDoctor'
 import DoctorSchedule from './ADMIN/Pages/SchedulesDoctor/SchedulesDoctor'
 import ProfileAppointmen from './KHACHHANG/DatLichKham/ThongTinDatKham'
 import EditThongTin from './KHACHHANG/DatLichKham/ThongTinDatKham/EditThongTin'
+import AllReview from './KHACHHANG/AllReview'
+import AllReviewMe from './KHACHHANG/XemAllReviewMe'
+import AllReviewAdmin from './ADMIN/Pages/AllReview'
+import Sidebar from './ADMIN/Layout/Sidebar'
+import HomePageWrapper from './layout/HomePageWrapper'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -61,9 +64,13 @@ function HomePage() {
   // Chưa login: hiển thị trang chủ public
   if (!isAuthenticated) {
     return (
-      <MainLayout>
-        <DoctorHome />
-      </MainLayout>
+      <HomePageWrapper>
+        {' '}
+        {/* Bọc bằng wrapper */}
+        <MainLayout>
+          <DoctorHome />
+        </MainLayout>
+      </HomePageWrapper>
     )
   }
 
@@ -79,9 +86,12 @@ function HomePage() {
       case 'USER':
         // USER role vẫn ở lại trang chủ
         return (
-          <MainLayout>
-            <DoctorHome />
-          </MainLayout>
+          <HomePageWrapper>
+            {/* Bọc bằng wrapper */}
+            <MainLayout>
+              <DoctorHome />
+            </MainLayout>
+          </HomePageWrapper>
         )
       default:
         return <Navigate to='/unauthorized' replace />
@@ -153,6 +163,7 @@ export default function useRouteElements() {
           children: [
             // { path: '', element: <QlyKhachHang /> },
             { path: 'qlyKhachHang', element: <QlyKhachHang /> },
+            { path: 'api/reviews', element: <AllReviewAdmin /> },
             { path: 'add', element: <AddKhachHang /> }, // ✔ hợp lệ
             { path: 'edit/:id', element: <EditKhachHang /> }, // ✔ hợp lệ
             { path: 'quan-ly-lich-lam-viec', element: <AllDoctor /> },
@@ -202,6 +213,8 @@ export default function useRouteElements() {
           ),
           children: [
             { path: 'allDoctor', element: <AllDoctors /> }, // ✔
+            { path: 'doctors/:doctorId/reviews', element: <AllReview /> }, // ✔
+            { path: 'reviews/me', element: <AllReviewMe /> }, // ✔
             { path: 'user-profile', element: <Profile /> }, // ✔
             { path: 'xac-nhan-dat-lich', element: <ProfileAppointmen /> },
             { path: ':id', element: <DoctorDetail /> },
@@ -212,7 +225,6 @@ export default function useRouteElements() {
       ]
     },
 
-    // Fallback - 404
     {
       path: '*',
       element: <Navigate to='/' replace />

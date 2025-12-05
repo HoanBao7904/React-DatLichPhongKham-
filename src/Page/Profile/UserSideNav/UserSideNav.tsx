@@ -1,37 +1,6 @@
 import { Link } from 'react-router-dom'
 
 export default function UserSideNav() {
-  // const { profile } = useContext(AppContext)
-  // return (
-  //   <div>
-  //     <div className='flex items-center py-4 border-b border-b-gray-200'>
-  //       <Link to='{path.profile}' className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-black'>
-  //         {/* <img src={profile?.avatar || Userimg} alt='' /> */}
-  //       </Link>
-  //       <div className='flex-grow pl-4'>
-  //         <div className='text-black mb-1 truncate text-left'>bão</div>
-  //         <Link to='' className='flex items-center capitalize text-gray-500'>
-  //           Sửa hồ sơ
-  //         </Link>
-  //       </div>
-  //     </div>
-  //     <div className='mt-7'>
-  //       <Link to='' className='flex items-center capitalize text-black hover:text-orange transition-colors'>
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>tài khoản của tôi</div>
-  //       </Link>
-
-  //       <Link to='' className='flex items-center capitalize text-black hover:text-orange transition-colors mt-4'>
-  //         <div className='h-[22px] w-[22px] mr-3'>
-  //           <img src='https://down-vn.img.susercontent.com/file/ba61750a46794d8847c3f463c5e71cc4' alt='' />
-  //         </div>
-  //         <div>đổi mật khẩu</div>
-  //       </Link>
-  //     </div>
-  //   </div>
-  // )
   return (
     <div className='bg-white rounded-2xl shadow-xl overflow-hidden'>
       {/* User Info Header */}
@@ -119,7 +88,7 @@ export default function UserSideNav() {
 
         {/* Thêm các menu khác nếu cần */}
         <Link
-          to=''
+          to='/user/reviews/me'
           className='flex items-center space-x-4 p-3 rounded-xl bg-[#f8fafc] hover:bg-gradient-to-r hover:from-blue-200 to-cyan-100 transition-all duration-300 group'
         >
           <div className='w-8 h-8 rounded-full bg-cyan-300 flex items-center justify-center group-hover:bg-white transition-colors duration-300'>
@@ -138,7 +107,7 @@ export default function UserSideNav() {
               />
             </svg>
           </div>
-          <span className='font-medium text-gray-700 group-hover:text-gray-900'>Lịch sử đặt khám</span>
+          <span className='font-medium text-gray-700 group-hover:text-gray-900'>Lịch sử đánh giá</span>
         </Link>
       </div>
     </div>

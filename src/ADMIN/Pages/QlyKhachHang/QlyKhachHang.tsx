@@ -135,8 +135,8 @@ export default function QlyKhachHang() {
                         #{user.userId}
                       </span>
                     </td>
-                    <td className='px-6 py-4 text-center  text-gray-800'>{user.fullName}</td>
-                    <td className='px-6 py-4 text-center w-[40px]'>{user.email}</td>
+                    <td className='px-6 py-4 text-center text-gray-800'>{user.fullName}</td>
+                    <td className='px-6 py-4 text-center max-w-[200px] truncate '>{user.email}</td>
                     <td className='px-6 py-4 text-center '>{user.phone}</td>
                     <td className='px-6 py-4 text-center text-gray-600'>{user.userName}</td>
                     <td className='px-6 py-4 text-center'>

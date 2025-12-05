@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { isUndefined, omitBy } from 'lodash'
+import { useState } from 'react'
 import Paginate from 'src/components/Paginate'
 import JobDoctor from 'src/DOCTOR/APIS/job.api'
 import useQueryParam from 'src/hooks/useQueryParam'
@@ -14,6 +15,8 @@ export type QueryConfig = {
 }
 
 export default function ViewAppointment() {
+  const [todayAppointments, setTodayAppointments] = useState<any[] | null>(null)
+
   const queryParams: QueryConfig = useQueryParam()
   const queryConfig: QueryConfig = omitBy(
     {
@@ -29,6 +32,8 @@ export default function ViewAppointment() {
   })
 
   const dataAppointment = data?.data
+  const listToRender = todayAppointments ?? dataAppointment?.data ?? []
+
   const totalPages = data?.data.totalPages || 1
   //   const dataTimeLine = data?.data['thời gian']
 
@@ -72,11 +77,46 @@ export default function ViewAppointment() {
         return status
     }
   }
+  const handleShowToday = () => {
+    if (!dataAppointment?.data) return
+
+    const today = new Date().toISOString().split('T')[0]
+
+    const filtered = dataAppointment.data.filter((item) => {
+      const itemDate = new Date(item.appointmentDateTime).toISOString().split('T')[0]
+      return itemDate === today
+    })
+
+    setTodayAppointments(filtered)
+  }
 
   return (
     <div className='min-h-screen bg-gray-50 py-8'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
+        <div className='mb-8 flex items-center justify-between'>
+          <div>
+            <h1 className='text-3xl font-bold text-gray-900'>Quản lý lịch hẹn</h1>
+            <p className='mt-2 text-sm text-gray-600'>Tổng số: {dataAppointment?.data?.length ?? 0} lịch hẹn</p>
+          </div>
+
+          {/* Nút xem hôm nay */}
+          <button
+            onClick={handleShowToday}
+            className='px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition'
+          >
+            Lịch hẹn hôm nay
+          </button>
+        </div>
+        {todayAppointments && (
+          <div className='mb-4 p-3 bg-blue-50 border border-blue-200 text-blue-700 rounded-lg'>
+            Hôm nay có <strong>{todayAppointments.length}</strong> lịch hẹn
+            <button className='ml-4 text-sm underline' onClick={() => setTodayAppointments(null)}>
+              Xem tất cả
+            </button>
+          </div>
+        )}
+
         <div className='mb-8'>
           <h1 className='text-3xl font-bold text-gray-900'>Quản lý lịch hẹn</h1>
           <p className='mt-2 text-sm text-gray-600'>Tổng số: {dataAppointment?.data?.length ?? 0} lịch hẹn</p>
@@ -116,7 +156,7 @@ export default function ViewAppointment() {
           </div>
 
           <div className='divide-y divide-gray-200'>
-            {dataAppointment?.data?.map((appointment) => {
+            {listToRender.map((appointment) => {
               const { date, time } = formatDateTime(appointment.appointmentDateTime)
 
               return (
