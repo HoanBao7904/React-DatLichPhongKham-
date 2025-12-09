@@ -38,7 +38,7 @@ export default function AddDepartment() {
       <div className='flex items-center justify-between'>
         <h2 className='text-2xl font-bold ml-3'>Thêm Khoa</h2>
         <Link
-          to='/admin/QlyKhoa'
+          to='/admin/quan-ly-khoa'
           className='bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors'
         >
           <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>

@@ -8,21 +8,34 @@ import { SchemaSeach, type SchemaDepartment } from 'src/utils/rules'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
 import DePartMentsApi from 'src/apis/department.api'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
+import { debounce } from 'lodash'
 
 type FormData = SchemaDepartment
 
 const nameSearch = SchemaSeach
+
 export default function AllDoctors() {
   const navigate = useNavigate()
   const queryParams = useQueryParam()
+  const searchRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Lấy các tham số từ URL
   const keyword = queryParams.keyword || ''
-  const deptParam = queryParams.dept // Lấy tham số dept từ URL
+  const deptParam = queryParams.dept
 
   // State cho selected department
   const [selectedDept, setSelectedDept] = useState<number | null>(null)
+  // State cho search input value
+  const [searchValue, setSearchValue] = useState(keyword)
+  // State cho gợi ý tìm kiếm
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  // State cho kết quả gợi ý
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [suggestions, setSuggestions] = useState<any[]>([])
+  // State cho loading suggestions
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false)
 
   // Effect để sync selectedDept với URL param
   useEffect(() => {
@@ -33,6 +46,13 @@ export default function AllDoctors() {
       }
     }
   }, [deptParam])
+
+  // Effect để sync searchValue với URL khi có keyword
+  useEffect(() => {
+    if (keyword) {
+      setSearchValue(keyword)
+    }
+  }, [keyword])
 
   // API calls
   const { data: searchData } = useQuery({
@@ -58,22 +78,79 @@ export default function AllDoctors() {
   })
 
   // Form
-  const { register, handleSubmit } = useForm<FormData>({
-    resolver: yupResolver(nameSearch)
+  const { register, handleSubmit, watch, setValue } = useForm<FormData>({
+    resolver: yupResolver(nameSearch),
+    defaultValues: {
+      search: keyword
+    }
   })
 
-  // const handleSubmitSearch = handleSubmit((data) => {
-  //   const keyword = data.search.trim()
+  // Theo dõi giá trị search input
+  const searchInputValue = watch('search')
 
-  //   if (keyword === '') {
-  //     navigate('/user/AllDoctor')
-  //   } else {
-  //     navigate(`?keyword=${keyword}`)
-  //   }
+  // Hàm fetch suggestions
+  const fetchSuggestions = async (value: string) => {
+    if (value.trim().length >= 2) {
+      setIsLoadingSuggestions(true)
+      try {
+        const response = await JobDoctor.GetDoctorsSearch(value)
+        if (response?.data?.data) {
+          // Giới hạn số lượng suggestions
+          setSuggestions(response.data.data.slice(0, 5))
+          setShowSuggestions(true)
+        } else {
+          setSuggestions([])
+        }
+      } catch (error) {
+        console.error('Error fetching suggestions:', error)
+        setSuggestions([])
+      } finally {
+        setIsLoadingSuggestions(false)
+      }
+    } else {
+      setSuggestions([])
+      setShowSuggestions(false)
+      setIsLoadingSuggestions(false)
+    }
+  }
 
-  //   // Clear department filter khi search
-  //   setSelectedDept(null)
-  // })
+  // Hàm debounced để fetch suggestions
+  const debouncedFetchSuggestions = useMemo(
+    () =>
+      debounce((value: string) => {
+        fetchSuggestions(value)
+      }, 300),
+    []
+  )
+
+  // Effect để gọi fetchSuggestions khi search input thay đổi
+  useEffect(() => {
+    if (searchInputValue !== undefined) {
+      const value = searchInputValue.trim()
+      setSearchValue(value)
+      debouncedFetchSuggestions(value)
+    }
+
+    return () => {
+      debouncedFetchSuggestions.cancel()
+    }
+  }, [searchInputValue, debouncedFetchSuggestions])
+
+  // Click outside để đóng suggestions
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  // Xử lý submit form (khi nhấn Enter)
   const handleSubmitSearch = handleSubmit((data) => {
     const keyword = data.search.trim()
 
@@ -82,28 +159,30 @@ export default function AllDoctors() {
     } else {
       // Clear khoa khi search
       setSelectedDept(null)
-      navigate(`?keyword=${keyword}`)
+      navigate(`?keyword=${encodeURIComponent(keyword)}`)
     }
+    setShowSuggestions(false)
   })
+
+  // Xử lý khi nhập input (không cần submit)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setValue('search', value, { shouldValidate: true })
+  }
 
   const handleAll = () => {
     setSelectedDept(null)
+    setValue('search', '')
+    setSearchValue('')
+    setShowSuggestions(false)
     navigate('/user/AllDoctor')
   }
 
-  // Xử lý khi chọn khoa từ dropdown
-  // const handleDepartmentSelect = (deptId: number | null) => {
-  //   setSelectedDept(deptId)
-
-  //   // Cập nhật URL với query param mới
-  //   if (deptId) {
-  //     navigate(`?dept=${deptId}`)
-  //   } else {
-  //     navigate('/user/AllDoctor')
-  //   }
-  // }
   const handleDepartmentSelect = (deptId: number | null) => {
     setSelectedDept(deptId)
+    setValue('search', '')
+    setSearchValue('')
+    setShowSuggestions(false)
 
     if (deptId) {
       navigate(`?dept=${deptId}`)
@@ -112,21 +191,25 @@ export default function AllDoctors() {
     }
   }
 
+  // Xử lý khi click vào suggestion
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSuggestionClick = (doctor: any) => {
+    setValue('search', doctor.fullName)
+    setSearchValue(doctor.fullName)
+    setShowSuggestions(false)
+    // Tự động điều hướng khi click suggestion
+    navigate(`?keyword=${encodeURIComponent(doctor.fullName)}`)
+  }
+
+  // Xử lý khi click vào xem tất cả kết quả
+  const handleViewAllResults = () => {
+    if (searchValue.trim()) {
+      navigate(`?keyword=${encodeURIComponent(searchValue.trim())}`)
+      setShowSuggestions(false)
+    }
+  }
+
   // QUYẾT ĐỊNH HIỂN THỊ DỮ LIỆU NÀO
-  // const displayData = useMemo(() => {
-  //   // ƯU TIÊN 1: Nếu có từ khóa search
-  //   if (keyword !== '') {
-  //     return searchData?.data?.data || []
-  //   }
-
-  //   // ƯU TIÊN 2: Nếu có selected department
-  //   if (selectedDept) {
-  //     return doctorsByDept?.data?.data || []
-  //   }
-
-  //   // MẶC ĐỊNH: Hiển thị tất cả bác sĩ
-  //   return allDoctorsData?.data?.data || []
-  // }, [keyword, selectedDept, searchData, doctorsByDept, allDoctorsData])
   const displayData = useMemo(() => {
     // ƯU TIÊN: Nếu có từ khóa search (bỏ qua khoa khi có keyword)
     if (keyword !== '') {
@@ -171,29 +254,135 @@ export default function AllDoctors() {
         </div>
 
         {/* Search and Filters */}
-        <div className='bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100'>
+        <div className='bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100 relative'>
           {/* Search Form */}
-          <form className='mb-6' onSubmit={handleSubmitSearch}>
-            <div className='relative'>
-              <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
-                  />
-                </svg>
+          <div className='mb-6' ref={searchRef}>
+            <form onSubmit={handleSubmitSearch} className='relative'>
+              <div className='relative'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                  <svg className='w-5 h-5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      strokeWidth={2}
+                      d='m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z'
+                    />
+                  </svg>
+                </div>
+                <input
+                  {...register('search')}
+                  ref={inputRef}
+                  type='text'
+                  onChange={handleInputChange}
+                  className='w-full pl-10 pr-12 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 placeholder-gray-500 bg-white shadow-sm transition-all duration-200'
+                  placeholder='Tìm kiếm bác sĩ theo tên, chuyên khoa...'
+                  autoComplete='off'
+                  onFocus={() => {
+                    if (searchValue.trim().length >= 2 && suggestions.length > 0) {
+                      setShowSuggestions(true)
+                    }
+                  }}
+                />
               </div>
-              <input
-                {...register('search')}
-                type='text'
-                className='w-full pl-10 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800 placeholder-gray-500 bg-white shadow-sm transition-all duration-200'
-                placeholder='Tìm kiếm bác sĩ theo tên, chuyên khoa...'
-                defaultValue={keyword}
-              />
-            </div>
-          </form>
+            </form>
+
+            {/* Search Suggestions Dropdown - CHIỀU RỘNG BẰNG THANH TÌM KIẾM */}
+            {showSuggestions && (
+              <div
+                className='absolute z-50 top-full mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto'
+                style={{ left: 0, right: 0 }}
+              >
+                <div className='py-2'>
+                  {/* Loading state */}
+                  {isLoadingSuggestions ? (
+                    <div className='py-4 text-center'>
+                      <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto'></div>
+                      <p className='text-gray-500 mt-2'>Đang tìm kiếm...</p>
+                    </div>
+                  ) : suggestions.length > 0 ? (
+                    <>
+                      {suggestions.map((doctor) => (
+                        <button
+                          key={doctor.id}
+                          type='button'
+                          onClick={() => handleSuggestionClick(doctor)}
+                          className='w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors duration-150 flex items-center gap-3 group border-b border-gray-100 last:border-b-0'
+                        >
+                          <div className='flex-shrink-0'>
+                            {doctor.imageUrl ? (
+                              <img
+                                src={doctor.imageUrl}
+                                alt={doctor.fullName}
+                                className='w-12 h-12 rounded-full object-cover border-2 border-blue-100'
+                              />
+                            ) : (
+                              <div className='w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-lg'>
+                                {doctor.fullName?.charAt(0) || 'B'}
+                              </div>
+                            )}
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <div className='font-semibold text-gray-900 truncate'>{doctor.fullName}</div>
+                            <div className='text-sm text-gray-600 truncate'>{doctor.departmentName || 'Bác sĩ'}</div>
+                            {doctor.experienceYears && (
+                              <div className='text-xs text-gray-500'>{doctor.experienceYears} năm kinh nghiệm</div>
+                            )}
+                          </div>
+                          <svg
+                            className='w-5 h-5 text-gray-300 group-hover:text-blue-500 transition-colors flex-shrink-0'
+                            fill='none'
+                            stroke='currentColor'
+                            viewBox='0 0 24 24'
+                          >
+                            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                          </svg>
+                        </button>
+                      ))}
+
+                      {/* Xem tất cả kết quả */}
+                      <div className='border-t border-gray-100 mt-2 pt-2'>
+                        <button
+                          type='button'
+                          onClick={handleViewAllResults}
+                          className='w-full text-center px-4 py-4 text-blue-600 hover:bg-blue-50 transition-colors duration-150 font-semibold group'
+                        >
+                          <div className='flex items-center justify-center gap-2'>
+                            <span className='text-base'>Xem tất cả kết quả cho "{searchValue}"</span>
+                            <svg
+                              className='w-5 h-5 transition-transform group-hover:translate-x-1'
+                              fill='none'
+                              stroke='currentColor'
+                              viewBox='0 0 24 24'
+                            >
+                              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+                            </svg>
+                          </div>
+                        </button>
+                      </div>
+                    </>
+                  ) : searchValue.trim().length >= 2 ? (
+                    <div className='px-4 py-8 text-center'>
+                      <svg
+                        className='w-12 h-12 mx-auto text-gray-300 mb-3'
+                        fill='none'
+                        stroke='currentColor'
+                        viewBox='0 0 24 24'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth={2}
+                          d='M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
+                      </svg>
+                      <p className='text-gray-500 font-medium'>Không tìm thấy bác sĩ phù hợp</p>
+                      <p className='text-gray-400 text-sm mt-1'>Thử tìm kiếm với từ khóa khác</p>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Filter Buttons */}
           <div className='flex flex-wrap items-center justify-center gap-3'>
@@ -255,6 +444,7 @@ export default function AllDoctors() {
                   />
                 </svg>
                 <p className='text-gray-500 text-lg'>Không tìm thấy bác sĩ nào phù hợp</p>
+                {keyword && <p className='text-gray-400 mt-2'>Thử tìm kiếm với từ khóa khác</p>}
               </div>
             )}
           </div>

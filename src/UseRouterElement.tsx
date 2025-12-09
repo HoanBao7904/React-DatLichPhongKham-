@@ -31,6 +31,11 @@ import AllReviewMe from './KHACHHANG/XemAllReviewMe'
 import AllReviewAdmin from './ADMIN/Pages/AllReview'
 import Sidebar from './ADMIN/Layout/Sidebar'
 import HomePageWrapper from './layout/HomePageWrapper'
+import QlyBacSi from './ADMIN/Pages/QlyBacSi'
+import EditDoctor from './ADMIN/Pages/QlyBacSi/EditDoctor.tsx'
+import DepartmentManager from './ADMIN/Pages/QlyKhoa/DepartmentManager.tsx'
+import UpdateDepartment from './ADMIN/Pages/QlyKhoa/UpdateDepartment/UpdateDepartment.tsx'
+import AddDepartment from './ADMIN/Pages/QlyKhoa/addDepartment/addDepartment.tsx'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -168,7 +173,12 @@ export default function useRouteElements() {
             { path: 'edit/:id', element: <EditKhachHang /> }, // ✔ hợp lệ
             { path: 'quan-ly-lich-lam-viec', element: <AllDoctor /> },
             { path: 'lich-lam-viec-cu-the/:id', element: <DoctorSchedule /> },
-            { path: 'ViewAppointmentAdmin', element: <ViewAppointmentAdmin /> }
+            { path: 'ViewAppointmentAdmin', element: <ViewAppointmentAdmin /> },
+            { path: 'quan-ly-bac-si', element: <QlyBacSi /> },
+            { path: 'UpdateDoctor/:id', element: <EditDoctor /> },
+            { path: 'quan-ly-khoa', element: <DepartmentManager /> },
+            { path: 'UpdateDepartment/:id', element: <UpdateDepartment /> },
+            { path: 'AddDepartment', element: <AddDepartment /> }
           ]
         },
 
@@ -219,7 +229,7 @@ export default function useRouteElements() {
             { path: 'xac-nhan-dat-lich', element: <ProfileAppointmen /> },
             { path: ':id', element: <DoctorDetail /> },
             { path: 'editHoSo', element: <EditThongTin /> }, // ✔
-            { path: 'viewappointmentkh', element: <ViewAppointmentKH /> } // ✔
+            { path: 'viewappointmentkh', element: <ViewAppointmentKH /> }
           ]
         }
       ]

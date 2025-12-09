@@ -3,7 +3,7 @@ import http from 'src/utils/http'
 import type { AllUser, schedules } from '../types/Admin.type'
 import type { QueryConfig } from '../Pages/QlyKhachHang/QlyKhachHang'
 import type { User } from 'src/types/user.type'
-import type { DoctorAppointment, DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
+import type { Departments, DoctorAppointment, DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
 import type { QueryConfig1 } from '../Pages/AllDoctor/AllDoctor'
 import type { RatingReview } from 'src/apis/rating.api'
 
@@ -80,6 +80,52 @@ const AllUserAPI = {
   },
   deleteReview(id: number) {
     return http.delete(`api/reviews/${id}`)
+  },
+  getAllDoctorAdmin() {
+    return http.get<SuccessResponseApi<DoctorDepartment>>('api/doctors')
+  },
+  patchSatus(id: number, body: { isActive: boolean }) {
+    return http.patch<SuccessResponseApi1<DoctorDepartment>>(`api/doctors/${id}`, body)
+  },
+  deleteDoctorAdmin(id: number) {
+    return http.delete(`api/doctors/${id}`)
+  },
+  putupdateDoctor(
+    //lỗi
+    id: number,
+    body: {
+      fullName: string
+      email: string
+      phone: string
+      experienceYears: number
+      description: string
+      active: boolean
+      departmentName: string
+    }
+  ) {
+    return http.put<SuccessResponseApi<DoctorDepartment>>(`api/doctors/${id}`, body)
+  },
+  getDetailsDoctor(id: number) {
+    return http.get<SuccessResponseApi1<DoctorDepartment>>(`api/doctors/${id}`)
+  },
+  getDepartment(params?: QueryConfig) {
+    const springParams = {
+      page: params?.page ? parseInt(params.page) - 1 : 0, // Spring Boot bắt đầu từ 0
+      size: params?.size || '10'
+    }
+    return http.get<SuccessResponseApi<Departments>>('api/departments', { params: springParams })
+  },
+  deleteDepartment(id: number) {
+    return http.delete(`api/departments/manually/${id}`)
+  },
+  getDetailDepartment(id: number) {
+    return http.get<SuccessResponseApi1<Departments>>(`api/departments/${id}`)
+  },
+  UpdateDepartMent(id: number, body: { name: string; description: string }) {
+    return http.put(`api/departments/${id}`, body)
+  },
+  addDepartments(body: { name: string; description: string }) {
+    return http.post('api/departments', body)
   }
 }
 

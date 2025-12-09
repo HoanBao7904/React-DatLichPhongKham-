@@ -66,3 +66,12 @@ export interface DoctorDepartment {
   specializations: never[]
   appointments: never[]
 }
+
+export interface Departments {
+  id: number
+  name: string
+  description: string
+  active: boolean
+  createdAt: null
+  updatedAt: null
+}
