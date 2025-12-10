@@ -36,6 +36,7 @@ import EditDoctor from './ADMIN/Pages/QlyBacSi/EditDoctor.tsx'
 import DepartmentManager from './ADMIN/Pages/QlyKhoa/DepartmentManager.tsx'
 import UpdateDepartment from './ADMIN/Pages/QlyKhoa/UpdateDepartment/UpdateDepartment.tsx'
 import AddDepartment from './ADMIN/Pages/QlyKhoa/addDepartment/addDepartment.tsx'
+import QlyKH from './ADMIN/Pages/QlyKH/QlyKH.tsx'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -166,8 +167,10 @@ export default function useRouteElements() {
             </ProtectedRoute>
           ),
           children: [
-            // { path: '', element: <QlyKhachHang /> },
-            { path: 'qlyKhachHang', element: <QlyKhachHang /> },
+            { path: '', element: <QlyKhachHang /> },
+            { path: 'qlynguoidung', element: <QlyKhachHang /> },
+            { path: 'quan-ly-danh-gia', element: <AllReviewAdmin /> },
+            { path: 'qlykhachhang', element: <QlyKH /> },
             { path: 'api/reviews', element: <AllReviewAdmin /> },
             { path: 'add', element: <AddKhachHang /> }, // ✔ hợp lệ
             { path: 'edit/:id', element: <EditKhachHang /> }, // ✔ hợp lệ

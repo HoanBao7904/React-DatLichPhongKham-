@@ -101,6 +101,7 @@ const AllUserAPI = {
       description: string
       active: boolean
       departmentName: string
+      departmentId: number
     }
   ) {
     return http.put<SuccessResponseApi<DoctorDepartment>>(`api/doctors/${id}`, body)

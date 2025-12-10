@@ -106,17 +106,29 @@ export default function QlyBacSi() {
                 <div className='flex items-center justify-center gap-2'>
                   <button
                     onClick={() => handleActive(doctor.id, doctor.active)}
-                    className='px-3 py-1 bg-blue-500 text-white rounded-lg text-sm'
+                    className='px-3 py-1 rounded-lg text-sm 
+               bg-blue-500 text-white 
+               hover:bg-blue-600 
+               transition-all duration-200 shadow-md'
                   >
-                    tắt{' '}
+                    Tắt
                   </button>
-                  <div>
-                    <Link to={`/admin/UpdateDoctor/${doctor.id}`}>Sửa</Link>
-                  </div>
 
+                  <Link
+                    to={`/admin/UpdateDoctor/${doctor.id}`}
+                    className='px-3 py-1 rounded-lg text-sm 
+               bg-amber-400 text-white 
+               hover:bg-amber-500 
+               transition-all duration-200 shadow-md'
+                  >
+                    Sửa
+                  </Link>
                   <button
                     onClick={() => handleClickDelete(doctor.id)}
-                    className='px-3 py-1 bg-red-500 text-white rounded-lg text-sm'
+                    className='px-3 py-1 rounded-lg text-sm 
+               bg-red-500 text-white 
+               hover:bg-red-600 
+               transition-all duration-200 shadow-md'
                   >
                     Xóa
                   </button>

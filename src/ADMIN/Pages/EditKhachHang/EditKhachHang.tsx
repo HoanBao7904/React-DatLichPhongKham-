@@ -13,8 +13,8 @@ type FormData = Omit<User, 'userId' | 'createdAt'>
 const roleToIdMap: { [key: string]: number } = {
   ADMIN: 1,
   USER: 2,
-  EMPLOYEE: 4,
-  DOCTOR: 3
+  EMPLOYEE: 3,
+  DOCTOR: 4
 }
 
 export default function EditKhachHang() {

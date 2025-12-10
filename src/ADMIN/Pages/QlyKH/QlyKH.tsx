@@ -14,7 +14,7 @@ export type QueryConfig = {
   [key in keyof paginate]?: string
 }
 
-export default function QlyKhachHang() {
+export default function QlyKH() {
   const queryClient = useQueryClient()
   const deleteUser = useMutation({
     mutationFn: (id: string | number) => AllUserAPI.deleteUserAPI(id),
@@ -54,7 +54,7 @@ export default function QlyKhachHang() {
   const responseData = data?.data
   const allUser = responseData?.data || []
 
-  // const doctorUsers = allUser.filter((u) => u.role === 'DOCTOR') chú ý
+  const Users = allUser.filter((u) => u.role === 'USER')
 
   const handleDelete = (id: number) => {
     deleteUser.mutate(id)
@@ -87,7 +87,7 @@ export default function QlyKhachHang() {
           <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
           </svg>
-          <span className='font-semibold'>Thêm người dùng</span>
+          <span className='font-semibold'>Thêm khách hàng</span>
         </Link>
       </div>
 
@@ -124,8 +124,8 @@ export default function QlyKhachHang() {
               </tr>
             </thead>
             <tbody>
-              {allUser.length > 0 ? (
-                allUser.map((user, index) => (
+              {Users.length > 0 ? (
+                Users.map((user, index) => (
                   <tr
                     key={user.userId}
                     className={`border-b hover:bg-gray-50 transition-colors duration-200 ${
