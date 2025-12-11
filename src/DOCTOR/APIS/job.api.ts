@@ -12,6 +12,18 @@ const URLAppointment = 'api/doctors/me/appointments'
 const URLProfileDoctor = 'api/doctors/me'
 const URLDoctorDepartment = '/api/doctors/department'
 
+export type DoctorProfile = {
+  fullName: string
+  email: string
+  phone: string
+  address?: string
+  dateOfBirth?: string
+  experienceYears: number
+  description: string
+  imageUrl?: string
+  departmentId?: number // API cần departmentId, không phải departmentName
+}
+
 const JobDoctor = {
   getSchedulesDoctor() {
     return http.get<DoctorListSchedules>(URLShedules)
@@ -38,6 +50,9 @@ const JobDoctor = {
     return http.get<SuccessResponseApi<DoctorDepartment>>(URLDoctorDepartment, {
       params: id
     })
+  },
+  updateProfileDoctor(body: DoctorProfile) {
+    return http.put<SuccessResponseApi1<DoctorDepartment>>('api/doctors/profile', body)
   }
 }
 

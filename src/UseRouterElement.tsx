@@ -37,6 +37,12 @@ import DepartmentManager from './ADMIN/Pages/QlyKhoa/DepartmentManager.tsx'
 import UpdateDepartment from './ADMIN/Pages/QlyKhoa/UpdateDepartment/UpdateDepartment.tsx'
 import AddDepartment from './ADMIN/Pages/QlyKhoa/addDepartment/addDepartment.tsx'
 import QlyKH from './ADMIN/Pages/QlyKH/QlyKH.tsx'
+import QlyEmployee from './ADMIN/Pages/QlyEmployee/QlyEmployee.tsx'
+import AllDoctoreMPLOYEE from './EMPLOYEE/AllDoctor/AllDoctor.tsx'
+import DepartmentManagerEmployee from './EMPLOYEE/QlyKhoa/DepartmentManager.tsx'
+import AddDepartmentEmployee from './EMPLOYEE/QlyKhoa/addDepartment/addDepartment.tsx'
+import UpdateDepartmentEmployee from './EMPLOYEE/QlyKhoa/UpdateDepartment/UpdateDepartment.tsx'
+import SchedulesDoctorEmployee from './EMPLOYEE/SchedulesDoctor/SchedulesDoctor.tsx'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -171,6 +177,7 @@ export default function useRouteElements() {
             { path: 'qlynguoidung', element: <QlyKhachHang /> },
             { path: 'quan-ly-danh-gia', element: <AllReviewAdmin /> },
             { path: 'qlykhachhang', element: <QlyKH /> },
+            { path: 'qlyNHANVIEN', element: <QlyEmployee /> },
             { path: 'api/reviews', element: <AllReviewAdmin /> },
             { path: 'add', element: <AddKhachHang /> }, // ✔ hợp lệ
             { path: 'edit/:id', element: <EditKhachHang /> }, // ✔ hợp lệ
@@ -211,7 +218,15 @@ export default function useRouteElements() {
               </EmployeeLayout>
             </ProtectedRoute>
           ),
-          children: [{ path: '', element: <div>Employee Home</div> }]
+          children: [
+            { path: 'quan-ly-danh-gia', element: <AllReviewAdmin /> },
+            { path: 'quan-ly-lich-lam-viec', element: <AllDoctoreMPLOYEE /> },
+            { path: 'lich-lam-viec-cu-the/:id', element: <SchedulesDoctorEmployee /> },
+            { path: 'ViewAppointmentAdmin', element: <ViewAppointmentAdmin /> },
+            { path: 'quan-ly-khoa', element: <DepartmentManagerEmployee /> },
+            { path: 'UpdateDepartment/:id', element: <UpdateDepartmentEmployee /> },
+            { path: 'AddDepartmentEmployee', element: <AddDepartmentEmployee /> }
+          ]
         },
 
         // USER có thể có thêm protected routes nếu cần

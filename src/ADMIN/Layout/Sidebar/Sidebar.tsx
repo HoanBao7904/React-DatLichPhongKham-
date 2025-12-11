@@ -61,6 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
               { to: 'qlynguoidung', label: 'Quản lý Người dùng' },
               { to: 'qlykhachhang', label: 'Quản lý Khách hàng' },
               { to: 'quan-ly-bac-si', label: 'Quản lý Bác sĩ' },
+              { to: 'qlyNHANVIEN', label: 'Quản lý nhân viên' },
               { to: 'quan-ly-lich-lam-viec', label: 'Quản lý Lịch làm việc' },
               { to: 'ViewAppointmentAdmin', label: 'Quản lý cuộc hẹn' },
               { to: 'quan-ly-khoa', label: 'Quản lý khoa' },

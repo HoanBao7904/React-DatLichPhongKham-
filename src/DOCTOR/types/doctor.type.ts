@@ -57,7 +57,7 @@ export interface DoctorDepartment {
   phone: string
   experienceYears: number
   description: string
-  imageUrl: null
+  imageUrl: string | null
   active: boolean
   isFeatured: boolean
   departmentId: number

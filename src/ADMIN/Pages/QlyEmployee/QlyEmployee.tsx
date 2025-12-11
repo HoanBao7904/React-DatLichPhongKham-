@@ -14,7 +14,7 @@ export type QueryConfig = {
   [key in keyof paginate]?: string
 }
 
-export default function QlyKH() {
+export default function QlyEmployee() {
   const queryClient = useQueryClient()
   const deleteUser = useMutation({
     mutationFn: (id: string | number) => AllUserAPI.deleteUserAPI(id),
@@ -54,7 +54,7 @@ export default function QlyKH() {
   const responseData = data?.data
   const allUser = responseData?.data || []
 
-  const Users = allUser.filter((u) => u.role === 'USER')
+  const Users = allUser.filter((u) => u.role === 'EMPLOYEE')
 
   const handleDelete = (id: number) => {
     deleteUser.mutate(id)
