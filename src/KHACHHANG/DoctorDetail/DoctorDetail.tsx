@@ -198,7 +198,6 @@ export default function DoctorDetail() {
       doctorUserId: Number(dataDoctorDetail.userId)
     }
 
-    // Navigate đến trang xác nhận với dữ liệu
     navigate('/user/xac-nhan-dat-lich', { state: appointmentData })
   }
 

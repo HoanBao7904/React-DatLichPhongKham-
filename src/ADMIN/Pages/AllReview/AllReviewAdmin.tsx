@@ -11,8 +11,10 @@ import type { paginate } from 'src/types/user.type'
 export type QueryConfig = {
   [key in keyof paginate]?: string
 }
+export type body = { active: boolean }
 
 export default function AllReviewAdmin() {
+  // const { id:idreview } = useParams()
   const queryClient = useQueryClient()
   const deleteReview = useMutation({
     mutationFn: (id: number) => AllUserAPI.deleteReview(id),
@@ -24,6 +26,19 @@ export default function AllReviewAdmin() {
     },
     onError: () => {
       toast.error('Xóa user thất bại')
+    }
+  })
+
+  const updateStatus = useMutation({
+    mutationFn: ({ id, active }: { id: number; active: boolean }) => AllUserAPI.updateStatus(id, { active }),
+    onSuccess: (_, id) => {
+      toast.success(`ẩn thành công comment id:${id}`)
+      queryClient.invalidateQueries({
+        queryKey: ['api/reviews']
+      })
+    },
+    onError: () => {
+      toast.error('Ẩn comment không thành công')
     }
   })
 
@@ -60,6 +75,10 @@ export default function AllReviewAdmin() {
   }
   const handleDelete = (id: number) => {
     deleteReview.mutate(id)
+  }
+
+  const handleHiddenStatus = (id: number, currentActive: boolean) => {
+    updateStatus.mutate({ id, active: !currentActive })
   }
 
   const stats = useMemo(
@@ -233,10 +252,10 @@ export default function AllReviewAdmin() {
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          review.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                          review.active ? 'bg-red-100 text-red-800' : 'bg-blue-300 text-blue-700'
                         }`}
                       >
-                        {review.active ? <>Hoạt động</> : <>Đã ẩn</>}
+                        {review.active ? <>Đã ẩn</> : <>Hoạt động</>}
                       </span>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
@@ -259,7 +278,7 @@ export default function AllReviewAdmin() {
                         <button
                           title='Ẩn'
                           //   onClick={() => handleDelete(user?.userId)}
-                          // onClick={() => handleDelete(review.id)}
+                          onClick={() => handleHiddenStatus(review.id, review.active)}
                           className='p-2 text-yellow-400 bg-yellow-50 rounded-lg hover:bg-yellow-300 hover:scale-110 transition-all duration-200 border border-yellow-500'
                         >
                           <svg

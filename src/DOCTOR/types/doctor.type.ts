@@ -75,3 +75,38 @@ export interface Departments {
   createdAt: null
   updatedAt: null
 }
+
+export interface PaymentResponse1 {
+  id: number
+  amount: number
+  paymentDate: string
+  paymentMethod: string
+  isDeposit: boolean | null
+  status: string
+  transactionId: string
+  gatewayTransactionNo: string | null
+  responseCode: string | null
+  appointmentId: number
+  paymentUrl: string
+}
+
+export interface PaymentRequest1 {
+  appointmentId: number
+  paymentMethod: 'BANK_TRANSFER'
+}
+
+export interface DetailAppointment {
+  id: number
+  appointmentDateTime: string
+  status: string
+  note: string
+  userId: number
+  userFullName: string
+  userEmail: string
+  userPhone: string
+  doctorId: number
+  doctorFullName: string
+  doctorDepartmentName: string
+  doctorImageUrl: string
+  doctorExperienceYears: number
+}

@@ -4,7 +4,7 @@ export default function DoctorHome1() {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Welcome Section */}
         <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900'>Xin chào, Bác sĩ Trường!</h1>
+          <h1 className='text-3xl font-bold text-gray-900'>Xin chào, Bác sĩ Hải!</h1>
           <p className='mt-2 text-gray-600'>Hôm nay là Thứ Tư, 27/11/2025</p>
         </div>
 

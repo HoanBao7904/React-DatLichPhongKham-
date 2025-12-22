@@ -206,7 +206,7 @@ export default function ConfirmAppointment() {
           {/* Sidebar - Tóm tắt lịch hẹn */}
           <div className='space-y-6'>
             <div className='bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden sticky top-8'>
-              <div className='bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4'>
+              <div className='bg-gradient-to-r from-blue-500 to-cyan-300 px-6 py-4'>
                 <h2 className='text-xl font-bold text-white flex items-center gap-3'>
                   <div className='w-8 h-8 bg-white/20 rounded-full flex items-center justify-center'>
                     <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -325,7 +325,7 @@ export default function ConfirmAppointment() {
                   <button
                     onClick={handleConfirm}
                     disabled={createAppointmentMutation.isPending}
-                    className='w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3'
+                    className='w-full bg-gradient-to-r from-blue-500 to-cyan-200 hover:from-green-700 hover:to-blue-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3'
                   >
                     {createAppointmentMutation.isPending ? (
                       <>

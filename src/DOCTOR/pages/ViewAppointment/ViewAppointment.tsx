@@ -15,6 +15,7 @@ export type QueryConfig = {
 }
 
 export default function ViewAppointment() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [todayAppointments, setTodayAppointments] = useState<any[] | null>(null)
 
   const queryParams: QueryConfig = useQueryParam()
@@ -94,12 +95,7 @@ export default function ViewAppointment() {
     <div className='min-h-screen bg-gray-50 py-8'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         {/* Header */}
-        <div className='mb-8 flex items-center justify-between'>
-          <div>
-            <h1 className='text-3xl font-bold text-gray-900'>Quản lý lịch hẹn</h1>
-            <p className='mt-2 text-sm text-gray-600'>Tổng số: {dataAppointment?.data?.length ?? 0} lịch hẹn</p>
-          </div>
-
+        <div className='mb-8 flex justify-end  items-center '>
           {/* Nút xem hôm nay */}
           <button
             onClick={handleShowToday}
@@ -118,7 +114,7 @@ export default function ViewAppointment() {
         )}
 
         <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-gray-900'>Quản lý lịch hẹn</h1>
+          <h1 className='text-3xl font-bold text-gray-900'>Xem cuộc hẹn</h1>
           <p className='mt-2 text-sm text-gray-600'>Tổng số: {dataAppointment?.data?.length ?? 0} lịch hẹn</p>
         </div>
 

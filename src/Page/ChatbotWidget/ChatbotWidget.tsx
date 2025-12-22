@@ -234,7 +234,9 @@ export default function ChatbotWidget() {
               <div className='flex items-center gap-3'>
                 <div className='relative'>
                   <div className='w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm'>
-                    <span className='text-xl sm:text-2xl'>🤖</span>
+                    <span className='text-xl sm:text-2xl'>
+                      <img src='/src/imgs/chatbot.png' alt='ảnh chatbot' />
+                    </span>
                   </div>
                   <div className='absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-400 border-2 border-white rounded-full animate-pulse'></div>
                 </div>

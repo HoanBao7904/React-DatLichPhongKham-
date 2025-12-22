@@ -104,15 +104,15 @@ export default function Timkiem() {
         {/* Stats Section */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16'>
           <div className='text-center text-white'>
-            <div className='text-3xl font-bold mb-2 drop-shadow-md'>500+</div>
+            <div className='text-3xl font-bold mb-2 drop-shadow-md'>50</div>
             <div className='text-white/80 font-medium'>Bác Sĩ Chuyên Khoa</div>
           </div>
           <div className='text-center text-white'>
-            <div className='text-3xl font-bold mb-2 drop-shadow-md'>100+</div>
-            <div className='text-white/80 font-medium'>Bệnh Viện & Phòng Khám</div>
+            <div className='text-3xl font-bold mb-2 drop-shadow-md'>2</div>
+            <div className='text-white/80 font-medium'>Phòng Khám</div>
           </div>
           <div className='text-center text-white'>
-            <div className='text-3xl font-bold mb-2 drop-shadow-md'>50K+</div>
+            <div className='text-3xl font-bold mb-2 drop-shadow-md'>1000+</div>
             <div className='text-white/80 font-medium'>Bệnh Nhân Hài Lòng</div>
           </div>
         </div>

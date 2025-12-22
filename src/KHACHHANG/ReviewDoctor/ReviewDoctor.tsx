@@ -108,7 +108,7 @@ export default function ReviewDoctor({ doctorId }: props) {
             </button>
             <button
               onClick={() => setSelectedRating(4)}
-              className={`px-4 py-2 rounded-full text-sm font-medium flex items-center ${selectedRating === 4 ? 'bg-green-600 text-white' : 'bg-green-50 text-green-700 hover:bg-green-100'}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium flex items-center ${selectedRating === 4 ? 'bg-green text-white' : 'bg-cyan-100 text-cyan-600 hover:bg-cyan-400'}`}
             >
               ★ 4 Sao ({countRatings(dataReview, 4)})
             </button>

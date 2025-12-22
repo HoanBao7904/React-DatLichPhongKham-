@@ -3,7 +3,14 @@ import http from 'src/utils/http'
 import type { AllUser, schedules } from '../types/Admin.type'
 import type { QueryConfig } from '../Pages/QlyKhachHang/QlyKhachHang'
 import type { User } from 'src/types/user.type'
-import type { Departments, DoctorAppointment, DoctorDepartment } from 'src/DOCTOR/types/doctor.type'
+import type {
+  Departments,
+  DetailAppointment,
+  DoctorAppointment,
+  DoctorDepartment,
+  PaymentRequest1,
+  PaymentResponse1
+} from 'src/DOCTOR/types/doctor.type'
 import type { QueryConfig1 } from '../Pages/AllDoctor/AllDoctor'
 import type { RatingReview } from 'src/apis/rating.api'
 
@@ -127,6 +134,15 @@ const AllUserAPI = {
   },
   addDepartments(body: { name: string; description: string }) {
     return http.post('api/departments', body)
+  },
+  updateStatus(id: number, body: { active: boolean }) {
+    return http.put<SuccessResponseApi1<RatingReview>>(`api/reviews/status/${id}`, body)
+  },
+  postQRPayment(body: PaymentRequest1) {
+    return http.post<SuccessResponseApi1<PaymentResponse1>>('api/payments', body)
+  },
+  getAppointmentStatus(appointmentId: number) {
+    return http.get<SuccessResponseApi1<DetailAppointment>>(`/api/appointments/${appointmentId}`)
   }
 }
 
