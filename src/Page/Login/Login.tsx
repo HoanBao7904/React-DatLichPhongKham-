@@ -10,7 +10,6 @@ import { AppContext } from 'src/contexts/app.context'
 import { useNavigate } from 'react-router-dom'
 import Button from 'src/components/button'
 import type { ErrorResponseAPI } from 'src/types/utils.type'
-import { path } from 'src/contanis/path'
 
 export default function Login() {
   const { SetIsAuthenticated, setProfile } = useContext(AppContext)
@@ -18,6 +17,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    setValue,
     setError,
     formState: { errors }
   } = useForm<loginSchema>({
@@ -95,6 +95,56 @@ export default function Login() {
               </a>
             </div>
 
+            <div className='mt-4'>
+              <p className='text-sm font-semibold text-gray-600 mb-3'>Tài khoản Demo</p>
+
+              <div className='grid grid-cols-2 gap-2'>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setValue('userName', 'nhanvien1')
+                    setValue('password', '111111')
+                  }}
+                  className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
+                >
+                  👨‍💼 Nhân viên
+                </button>
+
+                <button
+                  type='button'
+                  onClick={() => {
+                    setValue('userName', 'admin1')
+                    setValue('password', '111111')
+                  }}
+                  className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
+                >
+                  👑 Admin
+                </button>
+
+                <button
+                  type='button'
+                  onClick={() => {
+                    setValue('userName', 'bacsi1')
+                    setValue('password', '111111')
+                  }}
+                  className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
+                >
+                  👨‍⚕️ Bác sĩ
+                </button>
+
+                <button
+                  type='button'
+                  onClick={() => {
+                    setValue('userName', 'hoanbao')
+                    setValue('password', '111111')
+                  }}
+                  className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
+                >
+                  👤 Người dùng
+                </button>
+              </div>
+            </div>
+
             <Button
               className='w-full py-4 bg-gradient-to-r from-blue-400 to-cyan-200 text-white rounded-xl hover:from-blue-600 hover:to-cyan-400 transition-all duration-300 font-semibold text-base shadow-md hover:shadow-lg'
               type='submit'
@@ -104,18 +154,6 @@ export default function Login() {
               Đăng Nhập
             </Button>
           </form>
-
-          <div className='text-center mt-8'>
-            <p className='text-gray-600'>
-              Chưa có tài khoản?{' '}
-              <a
-                href={path.register}
-                className='text-blue-700 font-semibold hover:text-[#245232] transition-colors underline'
-              >
-                Đăng ký ngay
-              </a>
-            </p>
-          </div>
         </div>
 
         {/* Right side - Illustration */}
