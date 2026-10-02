@@ -107,7 +107,7 @@ export default function Login() {
                   }}
                   className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
                 >
-                  👨‍💼 Nhân viên
+                  Nhân viên
                 </button>
 
                 <button
@@ -118,7 +118,7 @@ export default function Login() {
                   }}
                   className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
                 >
-                  👑 Admin
+                  Admin
                 </button>
 
                 <button
@@ -129,7 +129,7 @@ export default function Login() {
                   }}
                   className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
                 >
-                  👨‍⚕️ Bác sĩ
+                  Bác sĩ
                 </button>
 
                 <button
@@ -140,7 +140,7 @@ export default function Login() {
                   }}
                   className='px-3 py-2 text-sm bg-gray-100 hover:bg-blue-100 rounded-lg transition'
                 >
-                  👤 Người dùng
+                  Người dùng
                 </button>
               </div>
             </div>
