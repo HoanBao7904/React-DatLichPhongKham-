@@ -221,6 +221,7 @@ export default function useRouteElements() {
           children: [
             { path: 'quan-ly-danh-gia', element: <AllReviewAdmin /> },
             { path: 'quan-ly-lich-lam-viec', element: <AllDoctoreMPLOYEE /> },
+            { path: '', element: <AllDoctoreMPLOYEE /> },
             { path: 'lich-lam-viec-cu-the/:id', element: <SchedulesDoctorEmployee /> },
             { path: 'ViewAppointmentAdmin', element: <ViewAppointmentAdmin /> },
             { path: 'quan-ly-khoa', element: <DepartmentManagerEmployee /> },

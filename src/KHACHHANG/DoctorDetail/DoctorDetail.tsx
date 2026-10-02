@@ -352,7 +352,7 @@ export default function DoctorDetail() {
                             disabled={!slot.isAvailable}
                             className={`p-3 rounded-xl border-2 text-sm text-center transition-all duration-200 ${
                               isSelected
-                                ? 'bg-gradient-to-br from-green-500 to-emerald-500 text-white border-green-500 shadow-lg scale-105'
+                                ? 'bg-gradient-to-br from-blue-400 to-cyan-200 text-white border-green-500 shadow-lg scale-105'
                                 : slot.isAvailable
                                   ? 'bg-white border-gray-200 hover:border-green-300 hover:shadow-md hover:scale-105 text-gray-700'
                                   : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-60'
